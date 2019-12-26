@@ -9,7 +9,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = global || self, global.ImageViewer = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -48,20 +48,35 @@
     return obj;
   }
 
-  function _objectSpread(target) {
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i] != null ? arguments[i] : {};
-      var ownKeys = Object.keys(source);
 
-      if (typeof Object.getOwnPropertySymbols === 'function') {
-        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-        }));
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
       }
-
-      ownKeys.forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
     }
 
     return target;
@@ -153,6 +168,10 @@
   }
 
   function _iterableToArrayLimit(arr, i) {
+    if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
+      return;
+    }
+
     var _arr = [];
     var _n = true;
     var _d = false;
@@ -202,13 +221,26 @@
     return -c * (t * t * t * t - 1) + b;
   }
   function createElement(options) {
-    var elem = document.createElement(options.tagName);
+    var elem;
+    var xmlns = "http://www.w3.org/2000/svg";
+    if (options.viewBox || options.href || options.d) elem = document.createElementNS(xmlns, options.tagName);else elem = document.createElement(options.tagName);
     if (options.id) elem.id = options.id;
     if (options.html) elem.innerHTML = options.html;
     if (options.className) elem.className = options.className;
     if (options.src) elem.src = options.src;
     if (options.style) elem.style.cssText = options.style;
-    if (options.child) elem.appendChild(options.child); // Insert before
+    if (options.child) elem.appendChild(options.child);
+    if (options.viewBox) elem.setAttribute('viewBox', options.viewBox);
+    if (options["class"]) elem.setAttribute('class', options["class"]);
+    if (options.d) elem.setAttribute('d', options.d);
+    if (options.fill) elem.setAttribute('fill', options.fill);
+    if (options.stroke) elem.setAttribute('stroke', options.stroke);
+
+    if (options.href) {
+      elem.setAttribute('href', options.href);
+      elem.setAttribute('width', '100%');
+      elem.setAttribute('height', '100%');
+    }
 
     if (options.insertBefore) {
       options.parent.insertBefore(elem, options.insertBefore); // Standard append
@@ -343,7 +375,7 @@
         var moveHandler = _this.moveHandler,
             endHandler = _this.endHandler,
             onStart = _this.onStart;
-        var isTouchEvent = eStart.type === 'touchstart';
+        var isTouchEvent = eStart.type === 'touchstart' || eStart.type === 'touchend';
         _this.touchMoveEvent = isTouchEvent ? 'touchmove' : 'mousemove';
         _this.touchEndEvent = isTouchEvent ? 'touchend' : 'mouseup';
         _this.sx = isTouchEvent ? eStart.touches[0].clientX : eStart.clientX;
@@ -593,14 +625,16 @@
           container = _this$_findContainerA.container,
           domElement = _this$_findContainerA.domElement,
           imageSrc = _this$_findContainerA.imageSrc,
-          hiResImageSrc = _this$_findContainerA.hiResImageSrc; // containers for elements
+          hiResImageSrc = _this$_findContainerA.hiResImageSrc,
+          viewBox = _this$_findContainerA.viewBox,
+          paths = _this$_findContainerA.paths; // containers for elements
 
 
       this._elements = {
         container: container,
         domElement: domElement
       };
-      this._options = _objectSpread({}, ImageViewer.defaults, options); // container for all events
+      this._options = _objectSpread2({}, ImageViewer.defaults, {}, options); // container for all events
 
       this._events = {}; // container for all timeout and frames
 
@@ -613,7 +647,9 @@
       };
       this._images = {
         imageSrc: imageSrc,
-        hiResImageSrc: hiResImageSrc
+        hiResImageSrc: hiResImageSrc,
+        viewBox: viewBox,
+        paths: paths
       };
 
       this._init();
@@ -718,7 +754,7 @@
         } // save references for later use
 
 
-        this._elements = _objectSpread({}, this._elements, {
+        this._elements = _objectSpread2({}, this._elements, {
           snapView: container.querySelector('.iv-snap-view'),
           snapImageWrap: container.querySelector('.iv-snap-image-wrap'),
           imageWrap: container.querySelector('.iv-image-wrap'),
@@ -974,11 +1010,15 @@
             _this6.zoom(zoomValue, center);
           };
 
-          var endListener = function endListener() {
+          var endListener = function endListener(eEnd) {
             // unbind events
             events.pinchMove();
             events.pinchEnd();
-            _this6._state.zooming = false;
+            _this6._state.zooming = false; // properly resume move event if one finger remains
+
+            if (eEnd.touches.length === 1) {
+              _this6._sliders.imageSlider.startHandler(eEnd);
+            }
           }; // remove events if already assigned
 
 
@@ -1089,7 +1129,9 @@
         var _images = this._images,
             _elements = this._elements;
         var imageSrc = _images.imageSrc,
-            hiResImageSrc = _images.hiResImageSrc;
+            hiResImageSrc = _images.hiResImageSrc,
+            viewBox = _images.viewBox,
+            paths = _images.paths;
         var container = _elements.container,
             snapImageWrap = _elements.snapImageWrap,
             imageWrap = _elements.imageWrap;
@@ -1103,17 +1145,73 @@
           src: imageSrc,
           insertBefore: snapImageWrap.firstChild,
           parent: snapImageWrap
+        }); // add svg
+
+        var svg = createElement({
+          tagName: 'svg',
+          "class": 'iv-image iv-small-image',
+          viewBox: viewBox,
+          parent: imageWrap
         }); // add image
 
         var image = createElement({
-          tagName: 'img',
-          className: 'iv-image iv-small-image',
-          src: imageSrc,
-          parent: imageWrap
+          tagName: 'image',
+          href: imageSrc,
+          parent: svg
         });
+
+        var onPathClicked = function onPathClicked(href, viewBox) {
+          _this9._images.imageSrc = href;
+          _this9._images.hiResImageSrc = href;
+          _this9._images.viewBox = viewBox;
+          console.log(_this9._images);
+
+          _this9._loadImages();
+        }; // add paths
+
+
+        var pathArr = [];
+
+        for (var i in paths) {
+          if (hiResImageSrc == paths[i].href) {
+            for (var j in paths[i].children) {
+              var childPath = paths[i].children[j].href;
+              var path = createElement({
+                tagName: 'path',
+                d: paths[i].children[j].d,
+                fill: 'whitesmoke',
+                stroke: 'white',
+                parent: svg
+              });
+              pathArr.push({
+                elem: path,
+                href: childPath
+              });
+            }
+          }
+        }
+
+        var _loop = function _loop(_i) {
+          var _loop2 = function _loop2(_j) {
+            if (paths[_j].href == pathArr[_i].href) {
+              assignEvent(pathArr[_i].elem, 'click', function () {
+                onPathClicked(pathArr[_i].href, paths[_j].viewBox);
+              });
+            }
+          };
+
+          for (var _j in paths) {
+            _loop2(_j);
+          }
+        };
+
+        for (var _i in pathArr) {
+          _loop(_i);
+        }
+
         this._state.loaded = false; // store image reference in _elements
 
-        this._elements.image = image;
+        this._elements.image = svg;
         this._elements.snapImage = snapImage;
         css(ivLoader, {
           display: 'block'
@@ -1134,11 +1232,10 @@
           css(image, {
             visibility: 'visible'
           }); // load high resolution image if provided
-
-          if (hiResImageSrc) {
-            _this9._loadHighResImage(hiResImageSrc);
-          } // set loaded flag to true
-
+          //if (hiResImageSrc) {
+          //    this._loadHighResImage(hiResImageSrc);
+          //}
+          // set loaded flag to true
 
           _this9._state.loaded = true; // calculate the dimension
 
@@ -1254,10 +1351,12 @@
       }
     }, {
       key: "load",
-      value: function load(imageSrc, hiResImageSrc) {
+      value: function load(imageSrc, hiResImageSrc, viewBox, paths) {
         this._images = {
           imageSrc: imageSrc,
-          hiResImageSrc: hiResImageSrc
+          hiResImageSrc: hiResImageSrc,
+          viewBox: viewBox,
+          paths: paths
         };
 
         this._loadImages();
@@ -1337,7 +1436,7 @@
       });
       var container = fullScreenElem.querySelector('.iv-fullscreen-container'); // call the ImageViewer constructor
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(FullScreenViewer).call(this, container, _objectSpread({}, options, {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(FullScreenViewer).call(this, container, _objectSpread2({}, options, {
         refreshOnResize: false
       }))); // add fullScreenElem on element list
 
@@ -1369,14 +1468,14 @@
       }
     }, {
       key: "show",
-      value: function show(imageSrc, hiResImageSrc) {
+      value: function show(imageSrc, hiResImageSrc, viewBox, paths) {
         // show the element
         css(this._elements.fullScreen, {
           display: 'block'
         }); // if image source is provide load image source
 
         if (imageSrc) {
-          this.load(imageSrc, hiResImageSrc);
+          this.load(imageSrc, hiResImageSrc, viewBox, paths);
         } // handle window resize
 
 
@@ -1405,4 +1504,4 @@
 
   return ImageViewer;
 
-}));
+})));
