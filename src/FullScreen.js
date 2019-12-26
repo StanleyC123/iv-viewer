@@ -32,13 +32,13 @@ class FullScreenViewer extends ImageViewer {
     // add close button event
     this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.hide);
   }
-  show (imageSrc, hiResImageSrc) {
+  show (imageSrc, hiResImageSrc, viewBox, paths) {
     // show the element
     css(this._elements.fullScreen, { display: 'block' });
 
     // if image source is provide load image source
     if (imageSrc) {
-      this.load(imageSrc, hiResImageSrc);
+      this.load(imageSrc, hiResImageSrc, viewBox, paths);
     }
 
     // handle window resize

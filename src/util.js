@@ -17,25 +17,40 @@ export function easeOutQuart (t, b, c, d) {
   return -c * (t * t * t * t - 1) + b;
 }
 
-export function createElement (options) {
-  const elem = document.createElement(options.tagName);
-  if (options.id) elem.id = options.id;
-  if (options.html) elem.innerHTML = options.html;
-  if (options.className) elem.className = options.className;
-  if (options.src) elem.src = options.src;
-  if (options.style) elem.style.cssText = options.style;
-  if (options.child) elem.appendChild(options.child);
+export function createElement(options) {
+    var elem;
+    var xmlns = "http://www.w3.org/2000/svg";
+    if (options.viewBox || options.href || options.d)
+        elem = document.createElementNS(xmlns, options.tagName);
+    else
+        elem = document.createElement(options.tagName);
+    if (options.id) elem.id = options.id;
+    if (options.html) elem.innerHTML = options.html;
+    if (options.className) elem.className = options.className;
+    if (options.src) elem.src = options.src;
+    if (options.style) elem.style.cssText = options.style;
+    if (options.child) elem.appendChild(options.child);
+    if (options.viewBox) elem.setAttribute('viewBox', options.viewBox);
+    if (options.class) elem.setAttribute('class', options.class);
+    if (options.d) elem.setAttribute('d', options.d);
+    if (options.fill) elem.setAttribute('fill', options.fill);
+    if (options.stroke) elem.setAttribute('stroke', options.stroke);
+    if (options.href) {
+        elem.setAttribute('href', options.href);
+        elem.setAttribute('width', '100%');
+        elem.setAttribute('height', '100%');
+    };
 
-  // Insert before
-  if (options.insertBefore) {
-    options.parent.insertBefore(elem, options.insertBefore);
+    // Insert before
+    if (options.insertBefore) {
+        options.parent.insertBefore(elem, options.insertBefore);
 
-  // Standard append
-  } else {
-    options.parent.appendChild(elem);
-  }
+        // Standard append
+    } else {
+        options.parent.appendChild(elem);
+    }
 
-  return elem;
+    return elem;
 }
 
 // method to add class
