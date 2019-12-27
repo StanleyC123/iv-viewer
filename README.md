@@ -171,12 +171,45 @@ First argument is to provide configuration options for the FullScreenViewer. Thi
 #### Instance methods (FullScreenViewer)
 FullScreenViewer inherits all the instance method of ImageViewer. In additional to that it has following methods.
 
-**show(imgSrc, highResImg)**
+**show(imgSrc, highResImg, viewBox, paths)**
 
 Show the full screen viewer with passed image on the show method. You can pass two different resolution of the image as first and second argument (optional). See why do you need it at [better image loading](#better-image-loading) section. 
 
 ```js
-viewer.show('image.png', 'hi-res-image.png');
+    var paths = [
+      { href: "../assets/iihp-k.png", viewBox: "0 0 3928 3315", children: 
+          [
+              { href: "../assets/iihp-1.png", d: "M 1465 397 h 217 v 144 h -217 Z" }, 
+              { href: "../assets/iihp-2.png", d: "M 1684 400 h 217 v 144 h -217 Z" }
+          ] 
+      },
+      { href: "../assets/iihp-1.png", viewBox: "0 0 4014 3325", children: 
+          [
+              { href: "../assets/iihp-2.png", d: "M 3693 1340 h 217 v 144 h -217 Z" }, 
+              { href: "../assets/iihp-4.png", d: "M 1940 2509 h 217 v 144 h -217 Z" }
+          ] 
+      },
+      { href: "../assets/iihp-2.png", viewBox: "0 0 3931 3233", children: 
+          [
+              { href: "../assets/iihp-1.png", d: "M 140 1332 h 217 v 144 h -217 Z" }, 
+              { href: "../assets/iihp-5.png", d: "M 1890 2490 h 217 v 144 h -217 Z" }
+          ] 
+      },
+      { href: "../assets/iihp-4.png", viewBox: "0 0 3918 3153", children: 
+          [
+              { href: "../assets/iihp-1.png", d: "M 1880 135 h 217 v 144 h -217 Z" }, 
+              { href: "../assets/iihp-5.png", d: "M 3620 1270 h 217 v 144 h -217 Z"}
+          ] 
+      },
+      { href: "../assets/iihp-5.png", viewBox: "0 0 3965 3234", children: 
+          [
+              { href: "../assets/iihp-2.png", d: "M 1900 210 h 217 v 144 h -217 Z" }, 
+              { href: "../assets/iihp-4.png", d: "M 160 1360 h 217 v 144 h -217 Z" }
+          ] 
+      }
+    ];
+
+    this.imageViewer.show(paths[0].href, paths[0].href, paths[0].viewBox, paths);
 ```
 
 **hide()**
