@@ -18,7 +18,7 @@ const fullScreenHtml = `
     <div class="iv-fullscreen-toolbar-element iv-fullscreen-toolbar-flip-vertical">
     &#x2385
     </div>
-    <div class="iv-fullscreen-home">&#127968</div>
+    <div class="iv-fullscreen-home">&#8962</div>
   </div>
 `;
 
