@@ -579,7 +579,6 @@ class ImageViewer {
             this._images.imageSrc = href;
             this._images.hiResImageSrc = href;
             this._images.viewBox = viewBox;
-            console.log(this._images)
             this._loadImages();
         };
 
@@ -592,8 +591,8 @@ class ImageViewer {
                     var path = createElement({
                         tagName: 'path',
                         d: paths[i].children[j].d,
-                        fill: 'whitesmoke',
-                        stroke: 'white',
+                        fill: 'transparent',
+                        stroke: 'black',
                         parent: svg
                     });
                     pathArr.push({ elem: path, href: childPath });
