@@ -1164,7 +1164,6 @@
           _this9._images.imageSrc = href;
           _this9._images.hiResImageSrc = href;
           _this9._images.viewBox = viewBox;
-          console.log(_this9._images);
 
           _this9._loadImages();
         }; // add paths
@@ -1179,8 +1178,8 @@
               var path = createElement({
                 tagName: 'path',
                 d: paths[i].children[j].d,
-                fill: 'whitesmoke',
-                stroke: 'white',
+                fill: 'transparent',
+                stroke: 'black',
                 parent: svg
               });
               pathArr.push({
