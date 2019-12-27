@@ -69,6 +69,77 @@
   -webkit-transform-origin: 50% 50%;
           transform-origin: 50% 50%;
 }
+.iv-fullscreen-toolbar {
+  position: absolute;
+  bottom: 0;
+  height: 5vh;
+  width: 100%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+          justify-content: space-evenly;
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, 0.75);
+}
+.iv-fullscreen-toolbar-element {
+  height: 100%;
+  font-size: 4vh;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+}
+.iv-fullscreen-toolbar-rotate-anticlockwise {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+.iv-fullscreen-toolbar-rotate-anticlockwise:hover {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+.iv-fullscreen-toolbar-rotate-clockwise {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+.iv-fullscreen-toolbar-rotate-clockwise:hover {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+.iv-fullscreen-toolbar-flip-horizontal {
+  -webkit-transform: scale(1, 1) rotate(0deg);
+          transform: scale(1, 1) rotate(0deg);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+.iv-fullscreen-toolbar-flip-horizontal:hover {
+  -webkit-transform: scale(-1, 1) rotate(0deg);
+          transform: scale(-1, 1) rotate(0deg);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+.iv-fullscreen-toolbar-flip-vertical {
+  -webkit-transform: scale(1, 1) rotate(90deg);
+          transform: scale(1, 1) rotate(90deg);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+.iv-fullscreen-toolbar-flip-vertical:hover {
+  -webkit-transform: scale(1, -1) rotate(90deg);
+          transform: scale(1, -1) rotate(90deg);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
 .iv-snap-view {
   width: 150px;
   height: 150px;

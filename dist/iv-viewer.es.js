@@ -347,6 +347,46 @@ function getTouchPointsDistance(touches) {
   return Math.sqrt(Math.pow(touch1.pageX - touch0.pageX, 2) + Math.pow(touch1.pageY - touch0.pageY, 2));
 }
 
+// Create 3D Identity matrix
+function m3dIdentity() {
+  return [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]];
+} // Create 2D translation matrix
+
+function m2dRotate() {
+  var thetaDeg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var TAU = 2 * Math.PI;
+  var thetaRad = TAU * thetaDeg / 360;
+  return [[Math.cos(thetaRad), -Math.sin(thetaRad), 0.0], [Math.sin(thetaRad), Math.cos(thetaRad), 0.0], [0.0, 0.0, 1.0]];
+} // Create 2D reflection matrix
+
+function m2dReflect() {
+  var thetaDeg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var TAU = 2 * Math.PI;
+  var thetaRad = TAU * thetaDeg / 360;
+  return [[Math.cos(2 * thetaRad), Math.sin(2 * thetaRad), 0.0], [Math.sin(2 * thetaRad), -Math.cos(2 * thetaRad), 0.0], [0.0, 0.0, 1.0]];
+} // Return product of two 2D matrices
+
+function m2dMultiply(a, b) {
+  return [[a[0][0] * b[0][0] + a[0][1] * b[1][0] + a[0][2] * b[2][0], a[0][0] * b[0][1] + a[0][1] * b[1][1] + a[0][2] * b[2][1], a[0][0] * b[0][2] + a[0][1] * b[1][2] + a[0][2] * b[2][2]], [a[1][0] * b[0][0] + a[1][1] * b[1][0] + a[1][2] * b[2][0], a[1][0] * b[0][1] + a[1][1] * b[1][1] + a[1][2] * b[2][1], a[1][0] * b[0][2] + a[1][1] * b[1][2] + a[1][2] * b[2][2]], [a[2][0] * b[0][0] + a[2][1] * b[1][0] + a[2][2] * b[2][0], a[2][0] * b[0][1] + a[2][1] * b[1][1] + a[2][2] * b[2][1], a[2][0] * b[0][2] + a[2][1] * b[1][2] + a[2][2] * b[2][2]]];
+} // Return a transformation matrix as a string
+
+function m2dToTransformString(m) {
+  return "matrix(" + m.slice(0, 2).flat().map(function (e) {
+    return function (num, precision) {
+      return Math.round(num * precision) / precision;
+    }(e, 1000);
+  }).map(function (e, i, arr) {
+    return function (w) {
+      return arr[Math.floor(i / w + i % w * arr.length / w)];
+    }(2);
+  }) + ")";
+} // Parse a transformation matrix
+
+function m2dParseTransformString(m) {
+  var arr = JSON.parse(m.replace('matrix(', '[').replace(')', ']'));
+  return [[arr[0], arr[2], arr[4]], [arr[1], arr[3], arr[5]], [0.0, 0.0, 1.0]];
+}
+
 var Slider =
 /*#__PURE__*/
 function () {
@@ -539,6 +579,37 @@ function () {
       };
 
       zoom();
+    });
+
+    _defineProperty(this, "applyMatrix", function (matrixA) {
+      // TO-DO: Handle exceptions.
+      // 2 transformation matrices are expected in the transform property
+      // Compute product of current transformations
+      var curTransform = document.querySelector('.iv-image').style.transform;
+      var matrixB = m2dParseTransformString(curTransform.match(/matrix[(].*?[)]/g)[0]);
+      var matrixC = m2dParseTransformString(curTransform.match(/matrix[(].*?[)]/g)[1]);
+      var matrixBC = m2dMultiply(matrixB, matrixC);
+      var curMatrix = m2dParseTransformString(css(_this._elements.image, 'transform')); // Re-apply transformation instantaneously
+
+      css(_this._elements.image, {
+        transform: m2dToTransformString(matrixBC),
+        transition: "none"
+      }); // Apply new transformation with transition
+
+      setTimeout(function () {
+        return css(_this._elements.image, {
+          transform: m2dToTransformString(matrixA) + m2dToTransformString(matrixBC),
+          transition: "transform, 0.2s"
+        });
+      }, 10);
+    });
+
+    _defineProperty(this, "rotate", function (angle) {
+      _this.applyMatrix(m2dRotate(angle));
+    });
+
+    _defineProperty(this, "reflect", function (angle) {
+      _this.applyMatrix(m2dReflect(angle));
     });
 
     _defineProperty(this, "_clearFrames", function () {
@@ -1407,7 +1478,7 @@ ImageViewer.defaults = {
   zoomOnMouseWheel: true
 };
 
-var fullScreenHtml = "\n  <div class=\"iv-fullscreen-container\"></div>\n  <div class=\"iv-fullscreen-close\"></div>\n";
+var fullScreenHtml = "\n  <div class=\"iv-fullscreen-container\"></div>\n  <div class=\"iv-fullscreen-close\"></div>\n  <div class=\"iv-fullscreen-toolbar\">\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-rotate-anticlockwise\">\n    &#x27F2\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-rotate-clockwise\">\n    &#x27F3\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-flip-horizontal\">\n    &#x2385\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-flip-vertical\">\n    &#x2385\n    </div>\n  </div>\n";
 
 var FullScreenViewer =
 /*#__PURE__*/
@@ -1441,7 +1512,16 @@ function (_ImageViewer) {
 
       removeCss(document.querySelector('html'), 'overflow'); // remove window event
 
-      _this._events.onWindowResize();
+      _this._events.onWindowResize(); // Remove toolbar events
+
+
+      _this._events.onRotateAcwBtnClick();
+
+      _this._events.onRotateCwBtnClick();
+
+      _this._events.onReflectHorizontalBtnClick();
+
+      _this._events.onReflectVerticalBtnClick();
     });
 
     _this._elements.fullScreen = fullScreenElem;
@@ -1462,6 +1542,8 @@ function (_ImageViewer) {
   }, {
     key: "show",
     value: function show(imageSrc, hiResImageSrc, viewBox, paths) {
+      var _this2 = this;
+
       // show the element
       css(this._elements.fullScreen, {
         display: 'block'
@@ -1469,8 +1551,29 @@ function (_ImageViewer) {
 
       if (imageSrc) {
         this.load(imageSrc, hiResImageSrc, viewBox, paths);
-      } // handle window resize
+      } // Initialize transformations to two Identity Matrices
 
+
+      css(this._elements.image, {
+        transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity())
+      }); // Add toolbar events
+
+      var rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
+      this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', function () {
+        _this2.rotate(-90);
+      });
+      var rotateCwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
+      this._events.onRotateCwBtnClick = assignEvent(rotateCwBtn, 'click', function () {
+        _this2.rotate(90);
+      });
+      var reflectHorizontalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
+      this._events.onReflectHorizontalBtnClick = assignEvent(reflectHorizontalBtn, 'click', function () {
+        _this2.reflect(90);
+      });
+      var reflectVerticalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-vertical');
+      this._events.onReflectVerticalBtnClick = assignEvent(reflectVerticalBtn, 'click', function () {
+        _this2.reflect(0);
+      }); // handle window resize
 
       this._events.onWindowResize = assignEvent(window, 'resize', this.refresh); // disable scroll on html
 
