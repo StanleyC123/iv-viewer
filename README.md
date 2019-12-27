@@ -173,7 +173,7 @@ FullScreenViewer inherits all the instance method of ImageViewer. In additional 
 
 **show(imgSrc, highResImg, viewBox, paths)**
 
-Show the full screen viewer with passed image on the show method. You can pass two different resolution of the image as first and second argument (optional). See why do you need it at [better image loading](#better-image-loading) section. 
+Show the full screen viewer with passed image on the show method. You can pass two different resolution of the image as first and second argument (optional). See why do you need it at [better image loading](#better-image-loading) section. The third parameter is for the viewbox size of the root svg. The fourth paramter is for an array of svg objects which contain the image sources and viewbox sizes. They can also take a children attribute which is an array of all the paths of the image and which image should show if the path is clicked.
 
 ```js
     var paths = [
