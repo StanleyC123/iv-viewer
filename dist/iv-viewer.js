@@ -1283,6 +1283,9 @@
 
         this._elements.image = svg;
         this._elements.snapImage = snapImage;
+        css(this._elements.image, {
+          transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity())
+        });
         css(ivLoader, {
           display: 'block'
         }); // keep visibility hidden until image is loaded
