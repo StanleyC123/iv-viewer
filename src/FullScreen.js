@@ -57,7 +57,7 @@ class FullScreenViewer extends ImageViewer {
             // add home button event
             const { fullScreen } = this._elements;
             const homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
-            this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', () => { this.show(imageSrc, hiResImageSrc, viewBox, paths) });
+            this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', () => { this.load(imageSrc, hiResImageSrc, viewBox, paths) });
 
             this.load(imageSrc, hiResImageSrc, viewBox, paths);
         }
