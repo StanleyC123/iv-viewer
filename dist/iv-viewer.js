@@ -1487,7 +1487,7 @@
     zoomOnMouseWheel: true
   };
 
-  var fullScreenHtml = "\n  <div class=\"iv-fullscreen-container\"></div>\n  <div class=\"iv-fullscreen-close\"></div>\n  <div class=\"iv-fullscreen-toolbar\">\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-rotate-anticlockwise\">\n    &#x27F2\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-rotate-clockwise\">\n    &#x27F3\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-flip-horizontal\">\n    &#x2385\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-flip-vertical\">\n    &#x2385\n    </div>\n  </div>\n";
+  var fullScreenHtml = "\n  <div class=\"iv-fullscreen-container\"></div>\n  <div class=\"iv-fullscreen-close\"></div>\n  <div class=\"iv-fullscreen-toolbar\">\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-rotate-anticlockwise\">\n    &#x27F2\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-rotate-clockwise\">\n    &#x27F3\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-flip-horizontal\">\n    &#x2385\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-flip-vertical\">\n    &#x2385\n    </div>\n    <div class=\"iv-fullscreen-home\">&#127968</div>\n  </div>\n";
 
   var FullScreenViewer =
   /*#__PURE__*/
@@ -1559,6 +1559,12 @@
         }); // if image source is provide load image source
 
         if (imageSrc) {
+          // add home button event
+          var fullScreen = this._elements.fullScreen;
+          var homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
+          this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', function () {
+            _this2.show(imageSrc, hiResImageSrc, viewBox, paths);
+          });
           this.load(imageSrc, hiResImageSrc, viewBox, paths);
         } // Initialize transformations to two Identity Matrices
 

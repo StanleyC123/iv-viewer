@@ -75,6 +75,11 @@
         transform-origin: 50% 50%;
     }
 
+    &-fullscreen-home {
+        font-size: 2em;
+        cursor: pointer;
+    }
+
     &-fullscreen-toolbar {
         position: absolute;
         bottom: 0;

@@ -18,88 +18,94 @@ const fullScreenHtml = `
     <div class="iv-fullscreen-toolbar-element iv-fullscreen-toolbar-flip-vertical">
     &#x2385
     </div>
+    <div class="iv-fullscreen-home">&#127968</div>
   </div>
 `;
 
 class FullScreenViewer extends ImageViewer {
-  constructor (options = {}) {
-    const fullScreenElem = createElement({
-      tagName: 'div',
-      className: 'iv-fullscreen',
-      html: fullScreenHtml,
-      parent: document.body,
-    });
+    constructor(options = {}) {
+        const fullScreenElem = createElement({
+            tagName: 'div',
+            className: 'iv-fullscreen',
+            html: fullScreenHtml,
+            parent: document.body,
+        });
 
-    const container = fullScreenElem.querySelector('.iv-fullscreen-container');
+        const container = fullScreenElem.querySelector('.iv-fullscreen-container');
 
-    // call the ImageViewer constructor
-    super(container, { ...options, refreshOnResize: false });
+        // call the ImageViewer constructor
+        super(container, { ...options, refreshOnResize: false });
 
-    // add fullScreenElem on element list
-    this._elements.fullScreen = fullScreenElem;
+        // add fullScreenElem on element list
+        this._elements.fullScreen = fullScreenElem;
 
-    this._initFullScreenEvents();
-  }
-  _initFullScreenEvents () {
-    const { fullScreen } = this._elements;
-    const closeBtn = fullScreen.querySelector('.iv-fullscreen-close');
-
-    // add close button event
-    this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.hide);
-  }
-  show (imageSrc, hiResImageSrc, viewBox, paths) {
-    // show the element
-    css(this._elements.fullScreen, { display: 'block' });
-
-    // if image source is provide load image source
-    if (imageSrc) {
-      this.load(imageSrc, hiResImageSrc, viewBox, paths);
+        this._initFullScreenEvents();
     }
+    _initFullScreenEvents() {
+        const { fullScreen } = this._elements;
+        const closeBtn = fullScreen.querySelector('.iv-fullscreen-close');
 
-    // Initialize transformations to two Identity Matrices
-    css(this._elements.image, { transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity()) });
-
-    // Add toolbar events
-    const rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
-    this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', (() => { this.rotate(-90); }));
-    const rotateCwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
-    this._events.onRotateCwBtnClick = assignEvent(rotateCwBtn, 'click', (() => { this.rotate(90); }));
-    const reflectHorizontalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
-    this._events.onReflectHorizontalBtnClick = assignEvent(reflectHorizontalBtn, 'click', (() => { this.reflect(90); }));
-    const reflectVerticalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-vertical');
-    this._events.onReflectVerticalBtnClick = assignEvent(reflectVerticalBtn, 'click', (() => { this.reflect(0); }));
-
-    // handle window resize
-    this._events.onWindowResize = assignEvent(window, 'resize', this.refresh);
-
-    // disable scroll on html
-    css(document.querySelector('html'), { overflow: 'hidden' });
+        // add close button event
+        this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.hide);
   }
-  hide = () => {
-    // hide the fullscreen
-    css(this._elements.fullScreen, { display: 'none' });
+    show(imageSrc, hiResImageSrc, viewBox, paths) {
+        // show the element
+        css(this._elements.fullScreen, { display: 'block' });
 
-    // enable scroll
-    removeCss(document.querySelector('html'), 'overflow');
+        // if image source is provide load image source
+        if (imageSrc) {
+            // add home button event
+            const { fullScreen } = this._elements;
+            const homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
+            this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', () => { this.show(imageSrc, hiResImageSrc, viewBox, paths) });
 
-    // remove window event
-    this._events.onWindowResize();
+            this.load(imageSrc, hiResImageSrc, viewBox, paths);
+        }
 
-    // Remove toolbar events
-    this._events.onRotateAcwBtnClick();
-    this._events.onRotateCwBtnClick();
-    this._events.onReflectHorizontalBtnClick();
-    this._events.onReflectVerticalBtnClick();
-  }
-  destroy () {
-    const { fullScreen } = this._elements;
+        // Initialize transformations to two Identity Matrices
+        css(this._elements.image, { transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity()) });
 
-    // destroy image viewer
-    super.destroy();
+        // Add toolbar events
+        const rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
+        this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', (() => { this.rotate(-90); }));
+        const rotateCwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
+        this._events.onRotateCwBtnClick = assignEvent(rotateCwBtn, 'click', (() => { this.rotate(90); }));
+        const reflectHorizontalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
+        this._events.onReflectHorizontalBtnClick = assignEvent(reflectHorizontalBtn, 'click', (() => { this.reflect(90); }));
+        const reflectVerticalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-vertical');
+        this._events.onReflectVerticalBtnClick = assignEvent(reflectVerticalBtn, 'click', (() => { this.reflect(0); }));
 
-    // remove the element
-    remove(fullScreen);
-  }
+        // handle window resize
+        this._events.onWindowResize = assignEvent(window, 'resize', this.refresh);
+
+        // disable scroll on html
+        css(document.querySelector('html'), { overflow: 'hidden' });
+    }
+    hide = () => {
+        // hide the fullscreen
+        css(this._elements.fullScreen, { display: 'none' });
+
+        // enable scroll
+        removeCss(document.querySelector('html'), 'overflow');
+
+        // remove window event
+        this._events.onWindowResize();
+
+        // Remove toolbar events
+        this._events.onRotateAcwBtnClick();
+        this._events.onRotateCwBtnClick();
+        this._events.onReflectHorizontalBtnClick();
+        this._events.onReflectVerticalBtnClick();
+    }
+    destroy() {
+        const { fullScreen } = this._elements;
+
+        // destroy image viewer
+        super.destroy();
+
+        // remove the element
+        remove(fullScreen);
+    }
 }
 
 export default FullScreenViewer;
