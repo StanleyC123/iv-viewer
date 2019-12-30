@@ -587,7 +587,7 @@ class ImageViewer {
         // add paths
         var pathArr = [];
         for (var i in paths) {
-            if (hiResImageSrc == paths[i].href) {
+            if (imageSrc == paths[i].href || hiResImageSrc == paths[i].href) {
                 for (var j in paths[i].children) {
                     var childPath = paths[i].children[j].href;
                     var path = createElement({
@@ -634,9 +634,9 @@ class ImageViewer {
             css(image, { visibility: 'visible' });
 
             // load high resolution image if provided
-            //if (hiResImageSrc) {
-            //    this._loadHighResImage(hiResImageSrc);
-            //}
+            if (hiResImageSrc) {
+                this._loadHighResImage(hiResImageSrc);
+            }
 
             // set loaded flag to true
             this._state.loaded = true;
@@ -656,27 +656,76 @@ class ImageViewer {
     }
     _loadHighResImage(hiResImageSrc) {
         const { imageWrap, container } = this._elements;
+        const { imageSrc, viewBox, paths } = this._images;
 
         const lowResImg = this._elements.image;
 
-        const hiResImage = createElement({
-            tagName: 'img',
-            className: 'iv-image iv-large-image',
-            src: hiResImageSrc,
-            parent: imageWrap,
-            style: lowResImg.style.cssText,
+        //const hiResImage = createElement({
+        //    tagName: 'img',
+        //    className: 'iv-image iv-large-image',
+        //    src: hiResImageSrc,
+        //    parent: imageWrap,
+        //    style: lowResImg.style.cssText,
+        //});
+
+        // add svg
+        const svg = createElement({
+            tagName: 'svg',
+            class: 'iv-image iv-large-image',
+            viewBox: viewBox,
+            parent: imageWrap
         });
 
+        // add image
+        const hiResImage = createElement({
+            tagName: 'image',
+            href: hiResImageSrc,
+            parent: svg,
+        });
+
+        var onPathClicked = (href, viewBox) => {
+            this._images.imageSrc = href;
+            this._images.hiResImageSrc = href;
+            this._images.viewBox = viewBox;
+            this._loadImages();
+        };
+
+        // add paths
+        var pathArr = [];
+        for (var i in paths) {
+            if (imageSrc == paths[i].href || hiResImageSrc == paths[i].href) {
+                for (var j in paths[i].children) {
+                    var childPath = paths[i].children[j].href;
+                    var path = createElement({
+                        tagName: 'path',
+                        d: paths[i].children[j].d,
+                        fill: 'transparent',
+                        stroke: 'black',
+                        parent: svg
+                    });
+                    pathArr.push({ elem: path, href: childPath });
+                }
+            }
+        }
+
+        for (let i in pathArr) {
+            for (let j in paths) {
+                if (paths[j].href == pathArr[i].href) {
+                    assignEvent(pathArr[i].elem, 'click', function () { onPathClicked(pathArr[i].href, paths[j].viewBox) });
+                }
+            }
+        }
+
         // add all the style attributes from lowResImg to highResImg
-        hiResImage.style.cssText = lowResImg.style.cssText;
+        // hiResImage.style.cssText = lowResImg.style.cssText;
 
         this._elements.image = container.querySelectorAll('.iv-image');
 
         const onHighResImageLoad = () => {
             // remove the low size image and set this image as default image
             remove(lowResImg);
-            this._elements.image = hiResImage;
-            // this._calculateDimensions();
+            this._elements.image = svg;
+             this._calculateDimensions();
         };
 
         if (imageLoaded(hiResImage)) {

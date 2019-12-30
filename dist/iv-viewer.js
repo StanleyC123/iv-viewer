@@ -1243,7 +1243,7 @@
         var pathArr = [];
 
         for (var i in paths) {
-          if (hiResImageSrc == paths[i].href) {
+          if (imageSrc == paths[i].href || hiResImageSrc == paths[i].href) {
             for (var j in paths[i].children) {
               var childPath = paths[i].children[j].href;
               var path = createElement({
@@ -1305,10 +1305,11 @@
           css(image, {
             visibility: 'visible'
           }); // load high resolution image if provided
-          //if (hiResImageSrc) {
-          //    this._loadHighResImage(hiResImageSrc);
-          //}
-          // set loaded flag to true
+
+          if (hiResImageSrc) {
+            _this9._loadHighResImage(hiResImageSrc);
+          } // set loaded flag to true
+
 
           _this9._state.loaded = true; // calculate the dimension
 
@@ -1332,22 +1333,90 @@
         var _this$_elements5 = this._elements,
             imageWrap = _this$_elements5.imageWrap,
             container = _this$_elements5.container;
-        var lowResImg = this._elements.image;
-        var hiResImage = createElement({
-          tagName: 'img',
-          className: 'iv-image iv-large-image',
-          src: hiResImageSrc,
-          parent: imageWrap,
-          style: lowResImg.style.cssText
-        }); // add all the style attributes from lowResImg to highResImg
+        var _this$_images = this._images,
+            imageSrc = _this$_images.imageSrc,
+            viewBox = _this$_images.viewBox,
+            paths = _this$_images.paths;
+        var lowResImg = this._elements.image; //const hiResImage = createElement({
+        //    tagName: 'img',
+        //    className: 'iv-image iv-large-image',
+        //    src: hiResImageSrc,
+        //    parent: imageWrap,
+        //    style: lowResImg.style.cssText,
+        //});
+        // add svg
 
-        hiResImage.style.cssText = lowResImg.style.cssText;
+        var svg = createElement({
+          tagName: 'svg',
+          "class": 'iv-image iv-large-image',
+          viewBox: viewBox,
+          parent: imageWrap
+        }); // add image
+
+        var hiResImage = createElement({
+          tagName: 'image',
+          href: hiResImageSrc,
+          parent: svg
+        });
+
+        var onPathClicked = function onPathClicked(href, viewBox) {
+          _this10._images.imageSrc = href;
+          _this10._images.hiResImageSrc = href;
+          _this10._images.viewBox = viewBox;
+
+          _this10._loadImages();
+        }; // add paths
+
+
+        var pathArr = [];
+
+        for (var i in paths) {
+          if (imageSrc == paths[i].href || hiResImageSrc == paths[i].href) {
+            for (var j in paths[i].children) {
+              var childPath = paths[i].children[j].href;
+              var path = createElement({
+                tagName: 'path',
+                d: paths[i].children[j].d,
+                fill: 'transparent',
+                stroke: 'black',
+                parent: svg
+              });
+              pathArr.push({
+                elem: path,
+                href: childPath
+              });
+            }
+          }
+        }
+
+        var _loop3 = function _loop3(_i2) {
+          var _loop4 = function _loop4(_j2) {
+            if (paths[_j2].href == pathArr[_i2].href) {
+              assignEvent(pathArr[_i2].elem, 'click', function () {
+                onPathClicked(pathArr[_i2].href, paths[_j2].viewBox);
+              });
+            }
+          };
+
+          for (var _j2 in paths) {
+            _loop4(_j2);
+          }
+        };
+
+        for (var _i2 in pathArr) {
+          _loop3(_i2);
+        } // add all the style attributes from lowResImg to highResImg
+        // hiResImage.style.cssText = lowResImg.style.cssText;
+
+
         this._elements.image = container.querySelectorAll('.iv-image');
 
         var onHighResImageLoad = function onHighResImageLoad() {
           // remove the low size image and set this image as default image
           remove(lowResImg);
-          _this10._elements.image = hiResImage; // this._calculateDimensions();
+          _this10._elements.image = svg;
+
+          _this10._calculateDimensions();
         };
 
         if (imageLoaded(hiResImage)) {
