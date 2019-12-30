@@ -1638,9 +1638,12 @@
 
           var fullScreen = this._elements.fullScreen;
           var homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
-          this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', function () {
+
+          var homeFunc = function homeFunc() {
             _this2.load(imageSrc, hiResImageSrc, viewBox, paths);
-          });
+          };
+
+          this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', homeFunc);
           this.load(imageSrc, hiResImageSrc, viewBox, paths);
         } // Initialize transformations to two Identity Matrices
 
