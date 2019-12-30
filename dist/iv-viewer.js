@@ -1637,6 +1637,8 @@
           var fullScreen = this._elements.fullScreen;
           var homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
           this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', function () {
+            console.log("HOME BUTTON CLICKED");
+
             _this2.load(imageSrc, hiResImageSrc, viewBox, paths);
           });
           this.load(imageSrc, hiResImageSrc, viewBox, paths);
