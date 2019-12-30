@@ -1585,11 +1585,7 @@
       }))); // add fullScreenElem on element list
 
       _defineProperty(_assertThisInitialized(_this), "hide", function () {
-        // remove home button event listener
-        var homeBtn = _this._elements.fullScreen.querySelector('.iv-fullscreen-home');
-
-        homeBtn.removeEventListener('click', _this.load); // hide the fullscreen
-
+        // hide the fullscreen
         css(_this._elements.fullScreen, {
           display: 'none'
         }); // enable scroll
@@ -1606,6 +1602,8 @@
         _this._events.onReflectHorizontalBtnClick();
 
         _this._events.onReflectVerticalBtnClick();
+
+        _this._events.onHomeBtnClick();
       });
 
       _this._elements.fullScreen = fullScreenElem;
@@ -1638,12 +1636,9 @@
 
           var fullScreen = this._elements.fullScreen;
           var homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
-
-          var homeFunc = function homeFunc() {
+          this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', function () {
             _this2.load(imageSrc, hiResImageSrc, viewBox, paths);
-          };
-
-          this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', homeFunc);
+          });
           this.load(imageSrc, hiResImageSrc, viewBox, paths);
         } // Initialize transformations to two Identity Matrices
 
