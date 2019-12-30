@@ -100,6 +100,7 @@ class FullScreenViewer extends ImageViewer {
         this._events.onReflectVerticalBtnClick();
     }
     destroy() {
+        console.log(this._elements)
         const { fullScreen } = this._elements;
 
         // destroy image viewer

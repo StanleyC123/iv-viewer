@@ -1671,6 +1671,7 @@
     }, {
       key: "destroy",
       value: function destroy() {
+        console.log(this._elements);
         var fullScreen = this._elements.fullScreen; // destroy image viewer
 
         _get(_getPrototypeOf(FullScreenViewer.prototype), "destroy", this).call(this); // remove the element
