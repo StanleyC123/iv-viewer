@@ -328,7 +328,6 @@
     }
   }
   function remove(elements) {
-    console.log(elements);
     var elmArray = toArray(elements);
     elmArray.forEach(function (element) {
       element.parentNode.removeChild(element);
@@ -1417,7 +1416,6 @@
 
         var onHighResImageLoad = function onHighResImageLoad() {
           // remove the low size image and set this image as default image
-          console.log(lowResImg);
           remove(lowResImg);
           _this10._elements.image = svg; // this._calculateDimensions();
         };
