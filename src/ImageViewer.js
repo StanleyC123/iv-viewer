@@ -725,7 +725,6 @@ class ImageViewer {
 
         const onHighResImageLoad = () => {
             // remove the low size image and set this image as default image
-            console.log(lowResImg)
             remove(lowResImg);
             this._elements.image = svg;
             // this._calculateDimensions();

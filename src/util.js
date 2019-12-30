@@ -139,7 +139,6 @@ export function unwrap(element) {
 }
 
 export function remove(elements) {
-    console.log(elements);
     const elmArray = toArray(elements);
     elmArray.forEach((element) => {
         element.parentNode.removeChild(element);
