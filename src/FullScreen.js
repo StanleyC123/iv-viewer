@@ -84,6 +84,9 @@ class FullScreenViewer extends ImageViewer {
         css(document.querySelector('html'), { overflow: 'hidden' });
     }
     hide = () => {
+        // remove home button event listener
+        removeEventListener(this._events.onHomeBtnClick)
+
         // hide the fullscreen
         css(this._elements.fullScreen, { display: 'none' });
 
@@ -104,9 +107,6 @@ class FullScreenViewer extends ImageViewer {
 
         // destroy image viewer
         super.destroy();
-
-        // remove home button event listener
-        removeEventListener(this._events.onHomeBtnClick);
 
         // remove the element
         remove(fullScreen);

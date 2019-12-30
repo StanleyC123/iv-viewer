@@ -1585,7 +1585,9 @@
       }))); // add fullScreenElem on element list
 
       _defineProperty(_assertThisInitialized(_this), "hide", function () {
-        // hide the fullscreen
+        // remove home button event listener
+        removeEventListener(_this._events.onHomeBtnClick); // hide the fullscreen
+
         css(_this._elements.fullScreen, {
           display: 'none'
         }); // enable scroll
@@ -1673,10 +1675,8 @@
       value: function destroy() {
         var fullScreen = this._elements.fullScreen; // destroy image viewer
 
-        _get(_getPrototypeOf(FullScreenViewer.prototype), "destroy", this).call(this); // remove home button event listener
+        _get(_getPrototypeOf(FullScreenViewer.prototype), "destroy", this).call(this); // remove the element
 
-
-        removeEventListener(this._events.onHomeBtnClick); // remove the element
 
         remove(fullScreen);
       }
