@@ -85,7 +85,7 @@ class FullScreenViewer extends ImageViewer {
     }
     hide = () => {
         // remove home button event listener
-        const homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
+        const homeBtn = this._elements.fullScreen.querySelector('.iv-fullscreen-home');
         homeBtn.removeEventListnener('click', this.load);
 
         // hide the fullscreen
