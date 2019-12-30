@@ -46,7 +46,7 @@ class FullScreenViewer extends ImageViewer {
         const closeBtn = fullScreen.querySelector('.iv-fullscreen-close');
 
         // add close button event
-        this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.hide);
+        this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.destroy);
   }
     show(imageSrc, hiResImageSrc, viewBox, paths) {
         // show the element
@@ -86,10 +86,6 @@ class FullScreenViewer extends ImageViewer {
     hide = () => {
         // hide the fullscreen
         css(this._elements.fullScreen, { display: 'none' });
-
-        // remove old images
-        const container = fullScreenElem.querySelector('.iv-fullscreen-container');
-        remove(container.querySelectorAll('.iv-snap-image, .iv-image'));
 
         // enable scroll
         removeCss(document.querySelector('html'), 'overflow');
