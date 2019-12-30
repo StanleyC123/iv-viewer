@@ -1400,10 +1400,13 @@ function () {
       for (var _i2 in pathArr) {
         _loop3(_i2);
       } // add all the style attributes from lowResImg to highResImg
+      // hiResImage.style.cssText = lowResImg.style.cssText;
 
 
-      svg.style.cssText = lowResImg.style.cssText; //this._elements.image = container.querySelectorAll('.iv-image');
-      //css(this._elements.image, { transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity()) });
+      this._elements.image = container.querySelectorAll('.iv-image');
+      css(this._elements.image, {
+        transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity())
+      });
 
       var onHighResImageLoad = function onHighResImageLoad() {
         // remove the low size image and set this image as default image

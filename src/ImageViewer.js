@@ -717,11 +717,11 @@ class ImageViewer {
         }
 
         // add all the style attributes from lowResImg to highResImg
-        svg.style.cssText = lowResImg.style.cssText;
+        // hiResImage.style.cssText = lowResImg.style.cssText;
 
-        //this._elements.image = container.querySelectorAll('.iv-image');
+        this._elements.image = container.querySelectorAll('.iv-image');
 
-        //css(this._elements.image, { transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity()) });
+        css(this._elements.image, { transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity()) });
 
         const onHighResImageLoad = () => {
             // remove the low size image and set this image as default image
