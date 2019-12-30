@@ -84,11 +84,12 @@ class FullScreenViewer extends ImageViewer {
         css(document.querySelector('html'), { overflow: 'hidden' });
     }
     hide = () => {
-        // remove home button event listener
-        removeEventListener(this._events.onHomeBtnClick)
-
         // hide the fullscreen
         css(this._elements.fullScreen, { display: 'none' });
+
+        // remove old images
+        const container = fullScreenElem.querySelector('.iv-fullscreen-container');
+        remove(container.querySelectorAll('.iv-snap-image, .iv-image'));
 
         // enable scroll
         removeCss(document.querySelector('html'), 'overflow');

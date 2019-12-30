@@ -1572,25 +1572,28 @@
 
       _classCallCheck(this, FullScreenViewer);
 
-      var fullScreenElem = createElement({
+      var _fullScreenElem = createElement({
         tagName: 'div',
         className: 'iv-fullscreen',
         html: fullScreenHtml,
         parent: document.body
       });
-      var container = fullScreenElem.querySelector('.iv-fullscreen-container'); // call the ImageViewer constructor
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(FullScreenViewer).call(this, container, _objectSpread2({}, options, {
+      var _container = _fullScreenElem.querySelector('.iv-fullscreen-container'); // call the ImageViewer constructor
+
+
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(FullScreenViewer).call(this, _container, _objectSpread2({}, options, {
         refreshOnResize: false
       }))); // add fullScreenElem on element list
 
       _defineProperty(_assertThisInitialized(_this), "hide", function () {
-        // remove home button event listener
-        removeEventListener(_this._events.onHomeBtnClick); // hide the fullscreen
-
+        // hide the fullscreen
         css(_this._elements.fullScreen, {
           display: 'none'
-        }); // enable scroll
+        }); // remove old images
+
+        var container = fullScreenElem.querySelector('.iv-fullscreen-container');
+        remove(container.querySelectorAll('.iv-snap-image, .iv-image')); // enable scroll
 
         removeCss(document.querySelector('html'), 'overflow'); // remove window event
 
@@ -1606,7 +1609,7 @@
         _this._events.onReflectVerticalBtnClick();
       });
 
-      _this._elements.fullScreen = fullScreenElem;
+      _this._elements.fullScreen = _fullScreenElem;
 
       _this._initFullScreenEvents();
 
