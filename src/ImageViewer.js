@@ -721,6 +721,8 @@ class ImageViewer {
 
         this._elements.image = container.querySelectorAll('.iv-image');
 
+        css(this._elements.image, { transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity()) });
+
         const onHighResImageLoad = () => {
             // remove the low size image and set this image as default image
             remove(lowResImg);

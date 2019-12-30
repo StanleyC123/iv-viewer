@@ -1404,6 +1404,9 @@ function () {
 
 
       this._elements.image = container.querySelectorAll('.iv-image');
+      css(this._elements.image, {
+        transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity())
+      });
 
       var onHighResImageLoad = function onHighResImageLoad() {
         // remove the low size image and set this image as default image
