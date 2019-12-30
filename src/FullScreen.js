@@ -100,6 +100,7 @@ class FullScreenViewer extends ImageViewer {
         this._events.onReflectHorizontalBtnClick();
         this._events.onReflectVerticalBtnClick();
 
+        // Remove home button event
         this._events.onHomeBtnClick();
     }
     destroy() {

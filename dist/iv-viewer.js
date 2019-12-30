@@ -1330,7 +1330,6 @@
       value: function _loadHighResImage(hiResImageSrc) {
         var _this10 = this;
 
-        console.log("CREATING HIGH RES IMAGE");
         var _this$_elements5 = this._elements,
             imageWrap = _this$_elements5.imageWrap,
             container = _this$_elements5.container;
@@ -1601,7 +1600,8 @@
 
         _this._events.onReflectHorizontalBtnClick();
 
-        _this._events.onReflectVerticalBtnClick();
+        _this._events.onReflectVerticalBtnClick(); // Remove home button event
+
 
         _this._events.onHomeBtnClick();
       });
