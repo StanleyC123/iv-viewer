@@ -1626,7 +1626,8 @@
         }); // if image source is provide load image source
 
         if (imageSrc) {
-          // add home button event
+          if (viewBox == null) viewBox = '0 0 5000 5000'; // add home button event
+
           var fullScreen = this._elements.fullScreen;
           var homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
           this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', function () {

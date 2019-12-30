@@ -54,6 +54,8 @@ class FullScreenViewer extends ImageViewer {
 
         // if image source is provide load image source
         if (imageSrc) {
+            if (viewBox == null)
+                viewBox = '0 0 5000 5000';
             // add home button event
             const { fullScreen } = this._elements;
             const homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
