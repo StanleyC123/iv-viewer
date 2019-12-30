@@ -1585,7 +1585,9 @@
       }))); // add fullScreenElem on element list
 
       _defineProperty(_assertThisInitialized(_this), "hide", function () {
-        // hide the fullscreen
+        // remove old images
+        remove(document.querySelectorAll('.iv-snap-image, .iv-image')); // hide the fullscreen
+
         css(_this._elements.fullScreen, {
           display: 'none'
         }); // enable scroll
@@ -1614,19 +1616,15 @@
     _createClass(FullScreenViewer, [{
       key: "_initFullScreenEvents",
       value: function _initFullScreenEvents() {
-        var _this2 = this;
-
         var fullScreen = this._elements.fullScreen;
         var closeBtn = fullScreen.querySelector('.iv-fullscreen-close'); // add close button event
 
-        this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', function () {
-          _this2.destroy();
-        });
+        this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.hide);
       }
     }, {
       key: "show",
       value: function show(imageSrc, hiResImageSrc, viewBox, paths) {
-        var _this3 = this;
+        var _this2 = this;
 
         // show the element
         css(this._elements.fullScreen, {
@@ -1639,7 +1637,7 @@
           var fullScreen = this._elements.fullScreen;
           var homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
           this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', function () {
-            _this3.load(imageSrc, hiResImageSrc, viewBox, paths);
+            _this2.load(imageSrc, hiResImageSrc, viewBox, paths);
           });
           this.load(imageSrc, hiResImageSrc, viewBox, paths);
         } // Initialize transformations to two Identity Matrices
@@ -1651,19 +1649,19 @@
 
         var rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
         this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', function () {
-          _this3.rotate(-90);
+          _this2.rotate(-90);
         });
         var rotateCwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
         this._events.onRotateCwBtnClick = assignEvent(rotateCwBtn, 'click', function () {
-          _this3.rotate(90);
+          _this2.rotate(90);
         });
         var reflectHorizontalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
         this._events.onReflectHorizontalBtnClick = assignEvent(reflectHorizontalBtn, 'click', function () {
-          _this3.reflect(90);
+          _this2.reflect(90);
         });
         var reflectVerticalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-vertical');
         this._events.onReflectVerticalBtnClick = assignEvent(reflectVerticalBtn, 'click', function () {
-          _this3.reflect(0);
+          _this2.reflect(0);
         }); // handle window resize
 
         this._events.onWindowResize = assignEvent(window, 'resize', this.refresh); // disable scroll on html
