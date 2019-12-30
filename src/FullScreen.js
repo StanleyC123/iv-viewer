@@ -59,7 +59,7 @@ class FullScreenViewer extends ImageViewer {
             // add home button event
             const { fullScreen } = this._elements;
             const homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
-            this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', () => { console.log("HOME BUTTON CLICKED"); this.load(imageSrc, hiResImageSrc, viewBox, paths) });
+            this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', () => { this.load(imageSrc, hiResImageSrc, viewBox, paths) });
 
             this.load(imageSrc, hiResImageSrc, viewBox, paths);
         }
@@ -84,8 +84,9 @@ class FullScreenViewer extends ImageViewer {
         css(document.querySelector('html'), { overflow: 'hidden' });
     }
     hide = () => {
-        // remove old images
-        remove(document.querySelectorAll('.iv-snap-image, .iv-image'));
+        // remove home button event listener
+        const homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
+        homeBtn.removeEventListnener('click', this.load);
 
         // hide the fullscreen
         css(this._elements.fullScreen, { display: 'none' });

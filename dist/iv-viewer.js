@@ -1585,8 +1585,9 @@
       }))); // add fullScreenElem on element list
 
       _defineProperty(_assertThisInitialized(_this), "hide", function () {
-        // remove old images
-        remove(document.querySelectorAll('.iv-snap-image, .iv-image')); // hide the fullscreen
+        // remove home button event listener
+        var homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
+        homeBtn.removeEventListnener('click', _this.load); // hide the fullscreen
 
         css(_this._elements.fullScreen, {
           display: 'none'
@@ -1634,11 +1635,11 @@
         if (imageSrc) {
           if (viewBox == null) viewBox = '0 0 5000 5000'; // add home button event
 
-          var fullScreen = this._elements.fullScreen;
-          var homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
-          this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', function () {
-            console.log("HOME BUTTON CLICKED");
+          var _fullScreen = this._elements.fullScreen;
 
+          var homeBtn = _fullScreen.querySelector('.iv-fullscreen-home');
+
+          this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', function () {
             _this2.load(imageSrc, hiResImageSrc, viewBox, paths);
           });
           this.load(imageSrc, hiResImageSrc, viewBox, paths);
