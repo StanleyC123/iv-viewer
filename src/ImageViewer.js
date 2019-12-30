@@ -655,6 +655,7 @@ class ImageViewer {
         }
     }
     _loadHighResImage(hiResImageSrc) {
+        console.log("CREATING HIGH RES IMAGE")
         const { imageWrap, container } = this._elements;
         const { imageSrc, viewBox, paths } = this._images;
 

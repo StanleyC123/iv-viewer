@@ -1330,6 +1330,7 @@
       value: function _loadHighResImage(hiResImageSrc) {
         var _this10 = this;
 
+        console.log("CREATING HIGH RES IMAGE");
         var _this$_elements5 = this._elements,
             imageWrap = _this$_elements5.imageWrap,
             container = _this$_elements5.container;
