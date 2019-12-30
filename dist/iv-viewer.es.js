@@ -1582,7 +1582,7 @@ function (_ImageViewer) {
       // remove home button event listener
       var homeBtn = _this._elements.fullScreen.querySelector('.iv-fullscreen-home');
 
-      homeBtn.removeEventListnener('click', _this.load); // hide the fullscreen
+      homeBtn.removeEventListener('click', _this.load); // hide the fullscreen
 
       css(_this._elements.fullScreen, {
         display: 'none'
