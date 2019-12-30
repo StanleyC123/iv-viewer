@@ -105,6 +105,9 @@ class FullScreenViewer extends ImageViewer {
         // destroy image viewer
         super.destroy();
 
+        // remove home button event listener
+        removeEventListener(this._events.onHomeBtnClick);
+
         // remove the element
         remove(fullScreen);
     }

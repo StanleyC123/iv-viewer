@@ -1673,8 +1673,10 @@
       value: function destroy() {
         var fullScreen = this._elements.fullScreen; // destroy image viewer
 
-        _get(_getPrototypeOf(FullScreenViewer.prototype), "destroy", this).call(this); // remove the element
+        _get(_getPrototypeOf(FullScreenViewer.prototype), "destroy", this).call(this); // remove home button event listener
 
+
+        removeEventListener(this._events.onHomeBtnClick); // remove the element
 
         remove(fullScreen);
       }
