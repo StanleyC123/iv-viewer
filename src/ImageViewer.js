@@ -725,7 +725,7 @@ class ImageViewer {
             // remove the low size image and set this image as default image
             remove(lowResImg);
             this._elements.image = svg;
-             this._calculateDimensions();
+            // this._calculateDimensions();
         };
 
         if (imageLoaded(hiResImage)) {

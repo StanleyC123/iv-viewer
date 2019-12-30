@@ -1414,9 +1414,7 @@
         var onHighResImageLoad = function onHighResImageLoad() {
           // remove the low size image and set this image as default image
           remove(lowResImg);
-          _this10._elements.image = svg;
-
-          _this10._calculateDimensions();
+          _this10._elements.image = svg; // this._calculateDimensions();
         };
 
         if (imageLoaded(hiResImage)) {
