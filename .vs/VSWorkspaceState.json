@@ -4,9 +4,10 @@
     "\\dist",
     "\\example",
     "\\example\\fullscreen-mode",
+    "\\example\\image-mode",
     "\\example\\images",
     "\\src"
   ],
-  "SelectedNode": "\\src\\ImageViewer.js",
+  "SelectedNode": "\\example\\fullscreen-mode\\example.js",
   "PreviewInSolutionExplorer": false
 }

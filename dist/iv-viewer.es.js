@@ -1551,7 +1551,7 @@ ImageViewer.defaults = {
   zoomOnMouseWheel: true
 };
 
-var fullScreenHtml = "\n  <div class=\"iv-fullscreen-container\"></div>\n  <div class=\"iv-fullscreen-close\"></div>\n  <div class=\"iv-fullscreen-toolbar\">\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-rotate-anticlockwise\">\n    &#x27F2\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-rotate-clockwise\">\n    &#x27F3\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-flip-horizontal\">\n    &#x2385\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-flip-vertical\">\n    &#x2385\n    </div>\n    <div class=\"iv-fullscreen-home\">&#8962</div>\n  </div>\n";
+var fullScreenHtml = "\n  <div class=\"iv-fullscreen-container\"></div>\n  <div class=\"iv-fullscreen-close\"></div>\n  <div class=\"iv-fullscreen-toolbar\">\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-rotate-anticlockwise\">\n    &#x27F2\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-rotate-clockwise\">\n    &#x27F3\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-flip-horizontal\">\n    &#x2385\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-toolbar-flip-vertical\">\n    &#x2385\n    </div>\n    <div class=\"iv-fullscreen-toolbar-element iv-fullscreen-home\">&#8962</div>\n  </div>\n";
 
 var FullScreenViewer =
 /*#__PURE__*/

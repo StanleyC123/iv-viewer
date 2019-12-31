@@ -69,10 +69,6 @@
   -webkit-transform-origin: 50% 50%;
           transform-origin: 50% 50%;
 }
-.iv-fullscreen-home {
-  font-size: 4vh;
-  cursor: pointer;
-}
 .iv-fullscreen-toolbar {
   position: absolute;
   bottom: 0;
