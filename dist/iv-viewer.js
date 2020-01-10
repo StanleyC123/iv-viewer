@@ -1052,6 +1052,7 @@
             container = _this$_elements3.container; // apply pinch and zoom feature
 
         var onPinchStart = function onPinchStart(eStart) {
+          console.log("ZOOMING STARTED");
           var _this6$_state = _this6._state,
               loaded = _this6$_state.loaded,
               startZoomValue = _this6$_state.zoomValue;

@@ -400,6 +400,7 @@ class ImageViewer {
 
         // apply pinch and zoom feature
         const onPinchStart = (eStart) => {
+            console.log("ZOOMING STARTED")
             const { loaded, zoomValue: startZoomValue } = this._state;
             const { _events: events } = this;
 
