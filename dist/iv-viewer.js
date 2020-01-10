@@ -1,7 +1,7 @@
 /**
  * iv-viewer - 2.0.1
  * Author : Sudhanshu Yadav
- * Copyright (c)  2019 to Sudhanshu Yadav, released under the MIT license.
+ * Copyright (c) 2019, 2020 to Sudhanshu Yadav, released under the MIT license.
  * git+https://github.com/s-yadav/iv-viewer.git
  */
 
@@ -1202,7 +1202,9 @@
         var imageSrc = _images.imageSrc,
             hiResImageSrc = _images.hiResImageSrc,
             viewBox = _images.viewBox,
-            paths = _images.paths;
+            paths = _images.paths,
+            fill = _images.fill,
+            stroke = _images.stroke;
         var container = _elements.container,
             snapImageWrap = _elements.snapImageWrap,
             imageWrap = _elements.imageWrap;
@@ -1249,8 +1251,8 @@
               var path = createElement({
                 tagName: 'path',
                 d: paths[i].children[j].d,
-                fill: 'transparent',
-                stroke: 'black',
+                fill: fill,
+                stroke: stroke,
                 parent: svg
               });
               pathArr.push({
@@ -1494,12 +1496,14 @@
       }
     }, {
       key: "load",
-      value: function load(imageSrc, hiResImageSrc, viewBox, paths) {
+      value: function load(imageSrc, hiResImageSrc, viewBox, paths, fill, stroke) {
         this._images = {
           imageSrc: imageSrc,
           hiResImageSrc: hiResImageSrc,
           viewBox: viewBox,
-          paths: paths
+          paths: paths,
+          fill: fill,
+          stroke: stroke
         };
 
         this._loadImages();
@@ -1623,7 +1627,7 @@
       }
     }, {
       key: "show",
-      value: function show(imageSrc, hiResImageSrc, viewBox, paths) {
+      value: function show(imageSrc, hiResImageSrc, viewBox, paths, fill, stroke) {
         var _this2 = this;
 
         // show the element
@@ -1637,9 +1641,9 @@
           var fullScreen = this._elements.fullScreen;
           var homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
           this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', function () {
-            _this2.load(imageSrc, hiResImageSrc, viewBox, paths);
+            _this2.load(imageSrc, hiResImageSrc, viewBox, paths, fill, stroke);
           });
-          this.load(imageSrc, hiResImageSrc, viewBox, paths);
+          this.load(imageSrc, hiResImageSrc, viewBox, paths, fill, stroke);
         } // Initialize transformations to two Identity Matrices
 
 

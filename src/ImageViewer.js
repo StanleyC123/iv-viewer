@@ -545,7 +545,7 @@ class ImageViewer {
 
     _loadImages() {
         const { _images, _elements } = this;
-        const { imageSrc, hiResImageSrc, viewBox, paths } = _images;
+        const { imageSrc, hiResImageSrc, viewBox, paths, fill, stroke } = _images;
         const { container, snapImageWrap, imageWrap } = _elements;
 
         const ivLoader = container.querySelector('.iv-loader');
@@ -593,8 +593,8 @@ class ImageViewer {
                     var path = createElement({
                         tagName: 'path',
                         d: paths[i].children[j].d,
-                        fill: 'transparent',
-                        stroke: 'black',
+                        fill: fill,
+                        stroke: stroke,
                         parent: svg
                     });
                     pathArr.push({ elem: path, href: childPath });
@@ -968,12 +968,14 @@ class ImageViewer {
         this._calculateDimensions();
         this.resetZoom();
     }
-    load(imageSrc, hiResImageSrc, viewBox, paths) {
+    load(imageSrc, hiResImageSrc, viewBox, paths, fill, stroke) {
         this._images = {
             imageSrc,
             hiResImageSrc,
             viewBox,
-            paths
+            paths,
+            fill,
+            stroke
         };
 
         this._loadImages();
