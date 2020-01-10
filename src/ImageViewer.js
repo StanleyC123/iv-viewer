@@ -977,6 +977,7 @@ class ImageViewer {
             viewBox,
             paths,
             fill,
+            fillOpacity,
             stroke
         };
 

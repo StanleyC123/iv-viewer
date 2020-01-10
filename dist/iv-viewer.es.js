@@ -1504,6 +1504,7 @@ function () {
         viewBox: viewBox,
         paths: paths,
         fill: fill,
+        fillOpacity: fillOpacity,
         stroke: stroke
       };
 
