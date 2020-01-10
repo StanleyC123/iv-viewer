@@ -340,11 +340,15 @@
   function assignEvent(element, events, handler) {
     if (typeof events === 'string') events = [events];
     events.forEach(function (event) {
-      element.addEventListener(event, handler);
+      if (event == 'touchstart' || event == 'touchmove' || event == 'touchend') element.addEventListener(event, handler, {
+        passive: false
+      });else element.addEventListener(event, handler);
     });
     return function () {
       events.forEach(function (event) {
-        element.removeEventListener(event, handler);
+        if (event == 'touchstart' || event == 'touchmove' || event == 'touchend') element.removeEventListener(event, handler, {
+          passive: false
+        });else element.removeEventListener(event, handler);
       });
     };
   }
