@@ -1203,10 +1203,7 @@
         var imageSrc = _images.imageSrc,
             hiResImageSrc = _images.hiResImageSrc,
             viewBox = _images.viewBox,
-            paths = _images.paths,
-            fill = _images.fill,
-            fillOpacity = _images.fillOpacity,
-            stroke = _images.stroke;
+            paths = _images.paths;
         var container = _elements.container,
             snapImageWrap = _elements.snapImageWrap,
             imageWrap = _elements.imageWrap;
@@ -1253,9 +1250,9 @@
               var path = createElement({
                 tagName: 'path',
                 d: paths[i].children[j].d,
-                fill: fill,
-                fillOpacity: fillOpacity,
-                stroke: stroke,
+                fill: paths[i].children[j].fill,
+                fillOpacity: paths[i].children[j].fillOpacity,
+                stroke: paths[i].children[j].stroke,
                 parent: svg
               });
               pathArr.push({
@@ -1341,10 +1338,7 @@
         var _this$_images = this._images,
             imageSrc = _this$_images.imageSrc,
             viewBox = _this$_images.viewBox,
-            paths = _this$_images.paths,
-            fill = _this$_images.fill,
-            fillOpacity = _this$_images.fillOpacity,
-            stroke = _this$_images.stroke;
+            paths = _this$_images.paths;
         var lowResImg = this._elements.image; //const hiResImage = createElement({
         //    tagName: 'img',
         //    className: 'iv-image iv-large-image',
@@ -1385,9 +1379,9 @@
               var path = createElement({
                 tagName: 'path',
                 d: paths[i].children[j].d,
-                fill: fill,
-                fillOpacity: fillOpacity,
-                stroke: stroke,
+                fill: paths[i].children[j].fill,
+                fillOpacity: paths[i].children[j].fillOpacity,
+                stroke: paths[i].children[j].stroke,
                 parent: svg
               });
               pathArr.push({
@@ -1503,15 +1497,12 @@
       }
     }, {
       key: "load",
-      value: function load(imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke) {
+      value: function load(imageSrc, hiResImageSrc, viewBox, paths) {
         this._images = {
           imageSrc: imageSrc,
           hiResImageSrc: hiResImageSrc,
           viewBox: viewBox,
-          paths: paths,
-          fill: fill,
-          fillOpacity: fillOpacity,
-          stroke: stroke
+          paths: paths
         };
 
         this._loadImages();
@@ -1635,7 +1626,7 @@
       }
     }, {
       key: "show",
-      value: function show(imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke) {
+      value: function show(imageSrc, hiResImageSrc, viewBox, paths) {
         var _this2 = this;
 
         // show the element
@@ -1649,9 +1640,9 @@
           var fullScreen = this._elements.fullScreen;
           var homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
           this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', function () {
-            _this2.load(imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke);
+            _this2.load(imageSrc, hiResImageSrc, viewBox, paths);
           });
-          this.load(imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke);
+          this.load(imageSrc, hiResImageSrc, viewBox, paths);
         } // Initialize transformations to two Identity Matrices
 
 

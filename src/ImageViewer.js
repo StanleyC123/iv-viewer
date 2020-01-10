@@ -545,7 +545,7 @@ class ImageViewer {
 
     _loadImages() {
         const { _images, _elements } = this;
-        const { imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke } = _images;
+        const { imageSrc, hiResImageSrc, viewBox, paths } = _images;
         const { container, snapImageWrap, imageWrap } = _elements;
 
         const ivLoader = container.querySelector('.iv-loader');
@@ -593,9 +593,9 @@ class ImageViewer {
                     var path = createElement({
                         tagName: 'path',
                         d: paths[i].children[j].d,
-                        fill: fill,
-                        fillOpacity: fillOpacity,
-                        stroke: stroke,
+                        fill: paths[i].children[j].fill,
+                        fillOpacity: paths[i].children[j].fillOpacity,
+                        stroke: paths[i].children[j].stroke,
                         parent: svg
                     });
                     pathArr.push({ elem: path, href: childPath });
@@ -657,7 +657,7 @@ class ImageViewer {
     }
     _loadHighResImage(hiResImageSrc) {
         const { imageWrap, container } = this._elements;
-        const { imageSrc, viewBox, paths, fill, fillOpacity, stroke } = this._images;
+        const { imageSrc, viewBox, paths } = this._images;
 
         const lowResImg = this._elements.image;
 
@@ -700,9 +700,9 @@ class ImageViewer {
                     var path = createElement({
                         tagName: 'path',
                         d: paths[i].children[j].d,
-                        fill: fill,
-                        fillOpacity: fillOpacity,
-                        stroke: stroke,
+                        fill: paths[i].children[j].fill,
+                        fillOpacity: paths[i].children[j].fillOpacity,
+                        stroke: paths[i].children[j].stroke,
                         parent: svg
                     });
                     pathArr.push({ elem: path, href: childPath });
@@ -970,15 +970,12 @@ class ImageViewer {
         this._calculateDimensions();
         this.resetZoom();
     }
-    load(imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke) {
+    load(imageSrc, hiResImageSrc, viewBox, paths) {
         this._images = {
             imageSrc,
             hiResImageSrc,
             viewBox,
-            paths,
-            fill,
-            fillOpacity,
-            stroke
+            paths
         };
 
         this._loadImages();

@@ -48,7 +48,7 @@ class FullScreenViewer extends ImageViewer {
         // add close button event
         this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.hide);
   }
-    show(imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke) {
+    show(imageSrc, hiResImageSrc, viewBox, paths) {
         // show the element
         css(this._elements.fullScreen, { display: 'block' });
 
@@ -59,9 +59,9 @@ class FullScreenViewer extends ImageViewer {
             // add home button event
             const { fullScreen } = this._elements;
             const homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
-            this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', () => { this.load(imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke) });
+            this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', () => { this.load(imageSrc, hiResImageSrc, viewBox, paths) });
 
-            this.load(imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke);
+            this.load(imageSrc, hiResImageSrc, viewBox, paths);
         }
 
         // Initialize transformations to two Identity Matrices
