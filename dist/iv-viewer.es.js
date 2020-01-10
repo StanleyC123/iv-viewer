@@ -1070,6 +1070,7 @@ function () {
         };
 
         var moveListener = function moveListener(eMove) {
+          console.log("TOUCH MOVING");
           if (eMove.cancelable) eMove.preventDefault();
           var newDist = getTouchPointsDistance(eMove.touches);
           var zoomValue = startZoomValue + (newDist - startDist) / 2;

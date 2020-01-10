@@ -427,6 +427,7 @@ class ImageViewer {
             };
 
             const moveListener = (eMove) => {
+                console.log("TOUCH MOVING")
                 if (eMove.cancelable)
                     eMove.preventDefault();
 
