@@ -426,7 +426,8 @@ class ImageViewer {
             };
 
             const moveListener = (eMove) => {
-                // eMove.preventDefault();
+                if (eMove.cancelable)
+                    eMove.preventDefault();
 
                 const newDist = getTouchPointsDistance(eMove.touches);
 
@@ -444,7 +445,7 @@ class ImageViewer {
                 if (eEnd.touches.length === 1) {
                     this._sliders.imageSlider.startHandler(eEnd);
                 }
-            };
+            };  
 
             // remove events if already assigned
             if (events.pinchMove) events.pinchMove();
