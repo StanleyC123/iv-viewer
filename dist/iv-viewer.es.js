@@ -1497,7 +1497,7 @@ function () {
     }
   }, {
     key: "load",
-    value: function load(imageSrc, hiResImageSrc, viewBox, paths, fill, stroke) {
+    value: function load(imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke) {
       this._images = {
         imageSrc: imageSrc,
         hiResImageSrc: hiResImageSrc,

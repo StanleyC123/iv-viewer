@@ -970,7 +970,7 @@ class ImageViewer {
         this._calculateDimensions();
         this.resetZoom();
     }
-    load(imageSrc, hiResImageSrc, viewBox, paths, fill, stroke) {
+    load(imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke) {
         this._images = {
             imageSrc,
             hiResImageSrc,
