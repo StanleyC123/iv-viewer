@@ -699,8 +699,8 @@ class ImageViewer {
                     var path = createElement({
                         tagName: 'path',
                         d: paths[i].children[j].d,
-                        fill: 'transparent',
-                        stroke: 'black',
+                        fill: fill,
+                        stroke: stroke,
                         parent: svg
                     });
                     pathArr.push({ elem: path, href: childPath });
