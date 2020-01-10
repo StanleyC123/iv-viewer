@@ -154,18 +154,12 @@ export function assignEvent(element, events, handler) {
     if (typeof events === 'string') events = [events];
 
     events.forEach((event) => {
-        if (event == 'touchstart' || event == 'touchmove' || event == 'touchend')
-            element.addEventListener(event, handler, { passive: false });
-        else
-            element.addEventListener(event, handler);
+        element.addEventListener(event, handler);
     });
 
     return () => {
         events.forEach((event) => {
-            if (event == 'touchstart' || event == 'touchmove' || event == 'touchend')
-                element.removeEventListener(event, handler, { passive: false });
-            else
-                element.removeEventListener(event, handler);
+            element.removeEventListener(event, handler);
         });
     };
 }

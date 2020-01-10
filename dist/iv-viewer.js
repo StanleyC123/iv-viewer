@@ -340,15 +340,11 @@
   function assignEvent(element, events, handler) {
     if (typeof events === 'string') events = [events];
     events.forEach(function (event) {
-      if (event == 'touchstart' || event == 'touchmove' || event == 'touchend') element.addEventListener(event, handler, {
-        passive: false
-      });else element.addEventListener(event, handler);
+      element.addEventListener(event, handler);
     });
     return function () {
       events.forEach(function (event) {
-        if (event == 'touchstart' || event == 'touchmove' || event == 'touchend') element.removeEventListener(event, handler, {
-          passive: false
-        });else element.removeEventListener(event, handler);
+        element.removeEventListener(event, handler);
       });
     };
   }
@@ -1057,6 +1053,7 @@
 
         var onPinchStart = function onPinchStart(eStart) {
           console.log("ZOOMING STARTED");
+          eStart.preventDefault();
           var _this6$_state = _this6._state,
               loaded = _this6$_state.loaded,
               startZoomValue = _this6$_state.zoomValue;
@@ -1080,8 +1077,8 @@
           };
 
           var moveListener = function moveListener(eMove) {
-            console.log("TOUCH MOVING");
-            if (eMove.cancelable) eMove.preventDefault();
+            console.log("TOUCH MOVING"); // eMove.preventDefault();
+
             var newDist = getTouchPointsDistance(eMove.touches);
             var zoomValue = startZoomValue + (newDist - startDist) / 2;
 

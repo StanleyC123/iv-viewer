@@ -401,6 +401,7 @@ class ImageViewer {
         // apply pinch and zoom feature
         const onPinchStart = (eStart) => {
             console.log("ZOOMING STARTED")
+            eStart.preventDefault();
             const { loaded, zoomValue: startZoomValue } = this._state;
             const { _events: events } = this;
 
@@ -428,8 +429,7 @@ class ImageViewer {
 
             const moveListener = (eMove) => {
                 console.log("TOUCH MOVING")
-                if (eMove.cancelable)
-                    eMove.preventDefault();
+                // eMove.preventDefault();
 
                 const newDist = getTouchPointsDistance(eMove.touches);
 
