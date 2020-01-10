@@ -34,6 +34,7 @@ export function createElement(options) {
     if (options.class) elem.setAttribute('class', options.class);
     if (options.d) elem.setAttribute('d', options.d);
     if (options.fill) elem.setAttribute('fill', options.fill);
+    if (options.fillOpacity) elem.setAttribute('fill-opacity', options.fillOpacity);
     if (options.stroke) elem.setAttribute('stroke', options.stroke);
     if (options.href) {
         elem.setAttribute('href', options.href);

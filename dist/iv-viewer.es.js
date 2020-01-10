@@ -228,6 +228,7 @@ function createElement(options) {
   if (options["class"]) elem.setAttribute('class', options["class"]);
   if (options.d) elem.setAttribute('d', options.d);
   if (options.fill) elem.setAttribute('fill', options.fill);
+  if (options.fillOpacity) elem.setAttribute('fill-opacity', options.fillOpacity);
   if (options.stroke) elem.setAttribute('stroke', options.stroke);
 
   if (options.href) {
@@ -1198,6 +1199,7 @@ function () {
           viewBox = _images.viewBox,
           paths = _images.paths,
           fill = _images.fill,
+          fillOpacity = _images.fillOpacity,
           stroke = _images.stroke;
       var container = _elements.container,
           snapImageWrap = _elements.snapImageWrap,
@@ -1246,6 +1248,7 @@ function () {
               tagName: 'path',
               d: paths[i].children[j].d,
               fill: fill,
+              fillOpacity: fillOpacity,
               stroke: stroke,
               parent: svg
             });
@@ -1334,6 +1337,7 @@ function () {
           viewBox = _this$_images.viewBox,
           paths = _this$_images.paths,
           fill = _this$_images.fill,
+          fillOpacity = _this$_images.fillOpacity,
           stroke = _this$_images.stroke;
       var lowResImg = this._elements.image; //const hiResImage = createElement({
       //    tagName: 'img',
@@ -1376,6 +1380,7 @@ function () {
               tagName: 'path',
               d: paths[i].children[j].d,
               fill: fill,
+              fillOpacity: fillOpacity,
               stroke: stroke,
               parent: svg
             });
@@ -1623,7 +1628,7 @@ function (_ImageViewer) {
     }
   }, {
     key: "show",
-    value: function show(imageSrc, hiResImageSrc, viewBox, paths, fill, stroke) {
+    value: function show(imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke) {
       var _this2 = this;
 
       // show the element
@@ -1637,9 +1642,9 @@ function (_ImageViewer) {
         var fullScreen = this._elements.fullScreen;
         var homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
         this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', function () {
-          _this2.load(imageSrc, hiResImageSrc, viewBox, paths, fill, stroke);
+          _this2.load(imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke);
         });
-        this.load(imageSrc, hiResImageSrc, viewBox, paths, fill, stroke);
+        this.load(imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke);
       } // Initialize transformations to two Identity Matrices
 
 

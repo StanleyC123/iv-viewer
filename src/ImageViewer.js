@@ -545,7 +545,7 @@ class ImageViewer {
 
     _loadImages() {
         const { _images, _elements } = this;
-        const { imageSrc, hiResImageSrc, viewBox, paths, fill, stroke } = _images;
+        const { imageSrc, hiResImageSrc, viewBox, paths, fill, fillOpacity, stroke } = _images;
         const { container, snapImageWrap, imageWrap } = _elements;
 
         const ivLoader = container.querySelector('.iv-loader');
@@ -594,6 +594,7 @@ class ImageViewer {
                         tagName: 'path',
                         d: paths[i].children[j].d,
                         fill: fill,
+                        fillOpacity: fillOpacity,
                         stroke: stroke,
                         parent: svg
                     });
@@ -656,7 +657,7 @@ class ImageViewer {
     }
     _loadHighResImage(hiResImageSrc) {
         const { imageWrap, container } = this._elements;
-        const { imageSrc, viewBox, paths, fill, stroke } = this._images;
+        const { imageSrc, viewBox, paths, fill, fillOpacity, stroke } = this._images;
 
         const lowResImg = this._elements.image;
 
@@ -700,6 +701,7 @@ class ImageViewer {
                         tagName: 'path',
                         d: paths[i].children[j].d,
                         fill: fill,
+                        fillOpacity: fillOpacity,
                         stroke: stroke,
                         parent: svg
                     });
