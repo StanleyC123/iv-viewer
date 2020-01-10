@@ -1338,7 +1338,9 @@
         var _this$_images = this._images,
             imageSrc = _this$_images.imageSrc,
             viewBox = _this$_images.viewBox,
-            paths = _this$_images.paths;
+            paths = _this$_images.paths,
+            fill = _this$_images.fill,
+            stroke = _this$_images.stroke;
         var lowResImg = this._elements.image; //const hiResImage = createElement({
         //    tagName: 'img',
         //    className: 'iv-image iv-large-image',

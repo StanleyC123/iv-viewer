@@ -656,7 +656,7 @@ class ImageViewer {
     }
     _loadHighResImage(hiResImageSrc) {
         const { imageWrap, container } = this._elements;
-        const { imageSrc, viewBox, paths } = this._images;
+        const { imageSrc, viewBox, paths, fill, stroke } = this._images;
 
         const lowResImg = this._elements.image;
 
