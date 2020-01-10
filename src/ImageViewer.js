@@ -437,6 +437,7 @@ class ImageViewer {
             };
 
             const endListener = (eEnd) => {
+                console.log("TOUCH END")
                 // unbind events
                 events.pinchMove();
                 events.pinchEnd();
@@ -445,6 +446,7 @@ class ImageViewer {
                 if (eEnd.touches.length === 1) {
                     this._sliders.imageSlider.startHandler(eEnd);
                 }
+                return true;
             };  
 
             // remove events if already assigned

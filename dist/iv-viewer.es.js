@@ -1077,7 +1077,8 @@ function () {
         };
 
         var endListener = function endListener(eEnd) {
-          // unbind events
+          console.log("TOUCH END"); // unbind events
+
           events.pinchMove();
           events.pinchEnd();
           _this6._state.zooming = false; // properly resume move event if one finger remains
@@ -1085,6 +1086,8 @@ function () {
           if (eEnd.touches.length === 1) {
             _this6._sliders.imageSlider.startHandler(eEnd);
           }
+
+          return true;
         }; // remove events if already assigned
 
 
