@@ -1266,6 +1266,7 @@ function () {
         var _loop2 = function _loop2(_j) {
           if (paths[_j].href == pathArr[_i].href) {
             assignEvent(pathArr[_i].elem, 'click', function (e) {
+              console.log(e);
               e.stopPropagation();
               onPathClicked(pathArr[_i].href, paths[_j].viewBox);
             });
