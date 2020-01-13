@@ -156,6 +156,7 @@ export function assignEvent(element, events, handler) {
     if (typeof events === 'string') events = [events];
 
     events.forEach((event) => {
+        console.log(event)
         element.addEventListener(event, handler);
     });
 

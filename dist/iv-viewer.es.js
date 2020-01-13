@@ -336,6 +336,7 @@ function assignEvent(element, events, handler) {
   console.log(handler);
   if (typeof events === 'string') events = [events];
   events.forEach(function (event) {
+    console.log(event);
     element.addEventListener(event, handler);
   });
   return function () {
