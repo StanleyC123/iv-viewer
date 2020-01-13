@@ -162,6 +162,8 @@ export function assignEvent(element, events, handler) {
     return () => {
         events.forEach((event) => {
             element.removeEventListener(event, handler);
+            console.log("Removed:")
+            console.log(handler)
         });
     };
 }

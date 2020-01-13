@@ -347,6 +347,8 @@
     return function () {
       events.forEach(function (event) {
         element.removeEventListener(event, handler);
+        console.log("Removed:");
+        console.log(handler);
       });
     };
   }

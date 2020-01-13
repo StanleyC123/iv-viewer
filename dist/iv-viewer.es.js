@@ -341,6 +341,8 @@ function assignEvent(element, events, handler) {
   return function () {
     events.forEach(function (event) {
       element.removeEventListener(event, handler);
+      console.log("Removed:");
+      console.log(handler);
     });
   };
 }
