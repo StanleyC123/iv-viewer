@@ -1395,14 +1395,9 @@ function () {
       var _loop3 = function _loop3(_i2) {
         var _loop4 = function _loop4(_j2) {
           if (paths[_j2].href == pathArr[_i2].href) {
-            assignEvent(pathArr[_i2].elem, 'touchstart', function (e) {
+            assignEvent(pathArr[_i2].elem, ['touchend', 'click'], function (e) {
               console.log(e);
               e.preventDefault();
-              onPathClicked(pathArr[_i2].href, paths[_j2].viewBox);
-            });
-            assignEvent(pathArr[_i2].elem, 'click', function (e) {
-              console.log(e);
-              e.stopPropagation();
               onPathClicked(pathArr[_i2].href, paths[_j2].viewBox);
             });
           }
