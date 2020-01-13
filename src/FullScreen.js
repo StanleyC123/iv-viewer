@@ -71,6 +71,7 @@ class FullScreenViewer extends ImageViewer {
         const rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
         console.log(rotateAcwBtn)
         this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', (() => { console.log("Clicked Rotate"); this.rotate(-90); }));
+        console.log(this._events.onRotateAcwBtnClick)
         const rotateCwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
         this._events.onRotateCwBtnClick = assignEvent(rotateCwBtn, 'click', (() => { this.rotate(90); }));
         const reflectHorizontalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-horizontal');

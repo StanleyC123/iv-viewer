@@ -1662,6 +1662,7 @@
 
           _this2.rotate(-90);
         });
+        console.log(this._events.onRotateAcwBtnClick);
         var rotateCwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
         this._events.onRotateCwBtnClick = assignEvent(rotateCwBtn, 'click', function () {
           _this2.rotate(90);
