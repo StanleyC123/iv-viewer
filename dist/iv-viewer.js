@@ -1053,7 +1053,6 @@
 
         var onPinchStart = function onPinchStart(eStart) {
           console.log("ZOOMING STARTED");
-          eStart.preventDefault();
           var _this6$_state = _this6._state,
               loaded = _this6$_state.loaded,
               startZoomValue = _this6$_state.zoomValue;
@@ -1272,7 +1271,8 @@
         var _loop = function _loop(_i) {
           var _loop2 = function _loop2(_j) {
             if (paths[_j].href == pathArr[_i].href) {
-              assignEvent(pathArr[_i].elem, 'click', function () {
+              assignEvent(pathArr[_i].elem, 'click', function (e) {
+                e.stopPropagation();
                 onPathClicked(pathArr[_i].href, paths[_j].viewBox);
               });
             }
