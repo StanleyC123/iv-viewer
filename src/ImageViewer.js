@@ -717,7 +717,7 @@ class ImageViewer {
         for (let i in pathArr) {
             for (let j in paths) {
                 if (paths[j].href == pathArr[i].href) {
-                    assignEvent(pathArr[i].elem, ['touchend', 'click'], function () { onPathClicked(pathArr[i].href, paths[j].viewBox) });
+                    assignEvent(pathArr[i].elem, 'click', function () { onPathClicked(pathArr[i].href, paths[j].viewBox) });
                 }
             }
         }
