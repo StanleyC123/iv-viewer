@@ -896,6 +896,7 @@ class ImageViewer {
         const matrixC = m2dParseTransformString(curTransform.match(/matrix[(].*?[)]/g)[1]);
         const matrixBC = m2dMultiply(matrixB, matrixC);
         const curMatrix = m2dParseTransformString(css(this._elements.image, 'transform'))
+        console.log(matrixBC);
         // Re-apply transformation instantaneously
         css(this._elements.image, {
             transform: m2dToTransformString(matrixBC),
@@ -907,7 +908,7 @@ class ImageViewer {
             transition: "transform, 0.2s",
         }), 10);
     }
-    rotate = (angle) => { this.applyMatrix(m2dRotate(angle)); }
+    rotate = (angle) => { console.log(angle); this.applyMatrix(m2dRotate(angle)); }
     reflect = (angle) => { this.applyMatrix(m2dReflect(angle)); }
     _clearFrames = () => {
         const { slideMomentumCheck, sliderMomentumFrame, zoomFrame } = this._frames;

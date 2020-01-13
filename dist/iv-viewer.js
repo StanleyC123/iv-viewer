@@ -596,7 +596,8 @@
         var matrixB = m2dParseTransformString(curTransform.match(/matrix[(].*?[)]/g)[0]);
         var matrixC = m2dParseTransformString(curTransform.match(/matrix[(].*?[)]/g)[1]);
         var matrixBC = m2dMultiply(matrixB, matrixC);
-        var curMatrix = m2dParseTransformString(css(_this._elements.image, 'transform')); // Re-apply transformation instantaneously
+        var curMatrix = m2dParseTransformString(css(_this._elements.image, 'transform'));
+        console.log(matrixBC); // Re-apply transformation instantaneously
 
         css(_this._elements.image, {
           transform: m2dToTransformString(matrixBC),
@@ -612,6 +613,8 @@
       });
 
       _defineProperty(this, "rotate", function (angle) {
+        console.log(angle);
+
         _this.applyMatrix(m2dRotate(angle));
       });
 
