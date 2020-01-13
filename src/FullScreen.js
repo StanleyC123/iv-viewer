@@ -99,10 +99,10 @@ class FullScreenViewer extends ImageViewer {
         this._events.onWindowResize();
 
         // Remove toolbar events
-        this._events.onRotateAcwBtnClick();
-        this._events.onRotateCwBtnClick();
-        this._events.onReflectHorizontalBtnClick();
-        this._events.onReflectVerticalBtnClick();
+        //this._events.onRotateAcwBtnClick();
+        //this._events.onRotateCwBtnClick();
+        //this._events.onReflectHorizontalBtnClick();
+        //this._events.onReflectVerticalBtnClick();
 
         // Remove home button event
         this._events.onHomeBtnClick();
