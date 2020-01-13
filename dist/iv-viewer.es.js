@@ -1599,11 +1599,15 @@ function (_ImageViewer) {
       removeCss(document.querySelector('html'), 'overflow'); // remove window event
 
       _this._events.onWindowResize(); // Remove toolbar events
-      //this._events.onRotateAcwBtnClick();
-      //this._events.onRotateCwBtnClick();
-      //this._events.onReflectHorizontalBtnClick();
-      //this._events.onReflectVerticalBtnClick();
-      // Remove home button event
+
+
+      _this._events.onRotateAcwBtnClick();
+
+      _this._events.onRotateCwBtnClick();
+
+      _this._events.onReflectHorizontalBtnClick();
+
+      _this._events.onReflectVerticalBtnClick(); // Remove home button event
 
 
       _this._events.onHomeBtnClick();
@@ -1674,7 +1678,8 @@ function (_ImageViewer) {
       var reflectVerticalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-vertical');
       this._events.onReflectVerticalBtnClick = assignEvent(reflectVerticalBtn, 'click', function () {
         _this2.reflect(0);
-      }); // handle window resize
+      });
+      console.log(this._events); // handle window resize
 
       this._events.onWindowResize = assignEvent(window, 'resize', this.refresh); // disable scroll on html
 

@@ -80,6 +80,7 @@ class FullScreenViewer extends ImageViewer {
         this._events.onReflectHorizontalBtnClick = assignEvent(reflectHorizontalBtn, 'click', (() => { this.reflect(90); }));
         const reflectVerticalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-vertical');
         this._events.onReflectVerticalBtnClick = assignEvent(reflectVerticalBtn, 'click', (() => { this.reflect(0); }));
+        console.log(this._events)
 
         // handle window resize
         this._events.onWindowResize = assignEvent(window, 'resize', this.refresh);
@@ -99,10 +100,10 @@ class FullScreenViewer extends ImageViewer {
         this._events.onWindowResize();
 
         // Remove toolbar events
-        //this._events.onRotateAcwBtnClick();
-        //this._events.onRotateCwBtnClick();
-        //this._events.onReflectHorizontalBtnClick();
-        //this._events.onReflectVerticalBtnClick();
+        this._events.onRotateAcwBtnClick();
+        this._events.onRotateCwBtnClick();
+        this._events.onReflectHorizontalBtnClick();
+        this._events.onReflectVerticalBtnClick();
 
         // Remove home button event
         this._events.onHomeBtnClick();
