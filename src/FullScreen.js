@@ -72,15 +72,16 @@ class FullScreenViewer extends ImageViewer {
 
         // Add toolbar events
         console.log("EVENTHANDLERS CREATED")
-        const rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
+        const { fullScreen } = this._elements;
+        const rotateAcwBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
         console.log(rotateAcwBtn)
         this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', (() => { console.log("Clicked Rotate"); this.rotate(-90); }));
         console.log(this._events.onRotateAcwBtnClick)
-        const rotateCwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
+        const rotateCwBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
         this._events.onRotateCwBtnClick = assignEvent(rotateCwBtn, 'click', (() => { this.rotate(90); }));
-        const reflectHorizontalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
+        const reflectHorizontalBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
         this._events.onReflectHorizontalBtnClick = assignEvent(reflectHorizontalBtn, 'click', (() => { this.reflect(90); }));
-        const reflectVerticalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-vertical');
+        const reflectVerticalBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-flip-vertical');
         this._events.onReflectVerticalBtnClick = assignEvent(reflectVerticalBtn, 'click', (() => { this.reflect(0); }));
         console.log(this._events)
 

@@ -1647,8 +1647,10 @@ function (_ImageViewer) {
           children: []
         }]; // add home button event
 
-        var fullScreen = this._elements.fullScreen;
-        var homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
+        var _fullScreen = this._elements.fullScreen;
+
+        var homeBtn = _fullScreen.querySelector('.iv-fullscreen-home');
+
         this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', function () {
           _this2.load(imageSrc, hiResImageSrc, viewBox, paths);
         });
@@ -1661,7 +1663,8 @@ function (_ImageViewer) {
       }); // Add toolbar events
 
       console.log("EVENTHANDLERS CREATED");
-      var rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
+      var fullScreen = this._elements.fullScreen;
+      var rotateAcwBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
       console.log(rotateAcwBtn);
       this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', function () {
         console.log("Clicked Rotate");
@@ -1669,15 +1672,15 @@ function (_ImageViewer) {
         _this2.rotate(-90);
       });
       console.log(this._events.onRotateAcwBtnClick);
-      var rotateCwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
+      var rotateCwBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
       this._events.onRotateCwBtnClick = assignEvent(rotateCwBtn, 'click', function () {
         _this2.rotate(90);
       });
-      var reflectHorizontalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
+      var reflectHorizontalBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
       this._events.onReflectHorizontalBtnClick = assignEvent(reflectHorizontalBtn, 'click', function () {
         _this2.reflect(90);
       });
-      var reflectVerticalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-vertical');
+      var reflectVerticalBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-flip-vertical');
       this._events.onReflectVerticalBtnClick = assignEvent(reflectVerticalBtn, 'click', function () {
         _this2.reflect(0);
       });
