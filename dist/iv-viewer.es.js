@@ -333,6 +333,7 @@ function clamp(num, min, max) {
 }
 function assignEvent(element, events, handler) {
   console.log(element);
+  console.log(handler);
   if (typeof events === 'string') events = [events];
   events.forEach(function (event) {
     element.addEventListener(event, handler);
