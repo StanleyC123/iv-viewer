@@ -56,6 +56,8 @@ class FullScreenViewer extends ImageViewer {
         if (imageSrc) {
             if (viewBox == null)
                 viewBox = '0 0 5000 5000';
+            if (paths == null)
+                paths = [{ href: hiResImageSrc, viewBox: '0 0 5000 5000', children: [] }];
             // add home button event
             const { fullScreen } = this._elements;
             const homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
@@ -68,15 +70,15 @@ class FullScreenViewer extends ImageViewer {
         css(this._elements.image, { transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity()) });
 
         // Add toolbar events
-        var rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
+        const rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
         console.log(rotateAcwBtn)
         this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', (() => { console.log("Clicked Rotate"); this.rotate(-90); }));
         console.log(this._events.onRotateAcwBtnClick)
-        var rotateCwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
+        const rotateCwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
         this._events.onRotateCwBtnClick = assignEvent(rotateCwBtn, 'click', (() => { this.rotate(90); }));
-        var reflectHorizontalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
+        const reflectHorizontalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
         this._events.onReflectHorizontalBtnClick = assignEvent(reflectHorizontalBtn, 'click', (() => { this.reflect(90); }));
-        var reflectVerticalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-vertical');
+        const reflectVerticalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-vertical');
         this._events.onReflectVerticalBtnClick = assignEvent(reflectVerticalBtn, 'click', (() => { this.reflect(0); }));
 
         // handle window resize
