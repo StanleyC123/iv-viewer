@@ -404,9 +404,9 @@ function () {
     _defineProperty(this, "startHandler", function (eStart) {
       if (!_this.isSliderEnabled()) return;
 
-      _this.removeListeners();
+      _this.removeListeners(); // eStart.preventDefault();
 
-      eStart.preventDefault();
+
       var moveHandler = _this.moveHandler,
           endHandler = _this.endHandler,
           onStart = _this.onStart;
@@ -432,8 +432,8 @@ function () {
     });
 
     _defineProperty(this, "moveHandler", function (eMove) {
-      if (!_this.isSliderEnabled()) return;
-      eMove.preventDefault();
+      if (!_this.isSliderEnabled()) return; // eMove.preventDefault();
+
       var sx = _this.sx,
           sy = _this.sy,
           onMove = _this.onMove;
@@ -1396,7 +1396,6 @@ function () {
         var _loop4 = function _loop4(_j2) {
           if (paths[_j2].href == pathArr[_i2].href) {
             assignEvent(pathArr[_i2].elem, ['touchend', 'click'], function () {
-              console.log(e);
               onPathClicked(pathArr[_i2].href, paths[_j2].viewBox);
             });
           }
