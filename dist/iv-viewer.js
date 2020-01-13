@@ -1637,12 +1637,12 @@
         // show the element
         css(this._elements.fullScreen, {
           display: 'block'
-        });
-        var fullScreen = this._elements.fullScreen; // if image source is provide load image source
+        }); // if image source is provide load image source
 
         if (imageSrc) {
           if (viewBox == null) viewBox = '0 0 5000 5000'; // add home button event
 
+          var fullScreen = this._elements.fullScreen;
           var homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
           this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', function () {
             _this2.load(imageSrc, hiResImageSrc, viewBox, paths);
@@ -1655,7 +1655,7 @@
           transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity())
         }); // Add toolbar events
 
-        var rotateAcwBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
+        var rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
         console.log(rotateAcwBtn);
         this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', function () {
           console.log("Clicked Rotate");
@@ -1663,15 +1663,15 @@
           _this2.rotate(-90);
         });
         console.log(this._events.onRotateAcwBtnClick);
-        var rotateCwBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
+        var rotateCwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
         this._events.onRotateCwBtnClick = assignEvent(rotateCwBtn, 'click', function () {
           _this2.rotate(90);
         });
-        var reflectHorizontalBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
+        var reflectHorizontalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
         this._events.onReflectHorizontalBtnClick = assignEvent(reflectHorizontalBtn, 'click', function () {
           _this2.reflect(90);
         });
-        var reflectVerticalBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-flip-vertical');
+        var reflectVerticalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-vertical');
         this._events.onReflectVerticalBtnClick = assignEvent(reflectVerticalBtn, 'click', function () {
           _this2.reflect(0);
         }); // handle window resize
