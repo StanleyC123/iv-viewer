@@ -1052,7 +1052,6 @@
             container = _this$_elements3.container; // apply pinch and zoom feature
 
         var onPinchStart = function onPinchStart(eStart) {
-          console.log(eStart);
           var _this6$_state = _this6._state,
               loaded = _this6$_state.loaded,
               startZoomValue = _this6$_state.zoomValue;
@@ -1076,8 +1075,7 @@
           };
 
           var moveListener = function moveListener(eMove) {
-            console.log("TOUCH MOVING"); // eMove.preventDefault();
-
+            // eMove.preventDefault();
             var newDist = getTouchPointsDistance(eMove.touches);
             var zoomValue = startZoomValue + (newDist - startDist) / 2;
 
@@ -1085,8 +1083,7 @@
           };
 
           var endListener = function endListener(eEnd) {
-            console.log("TOUCH END"); // unbind events
-
+            // unbind events
             events.pinchMove();
             events.pinchEnd();
             _this6._state.zooming = false; // properly resume move event if one finger remains
@@ -1271,8 +1268,7 @@
         var _loop = function _loop(_i) {
           var _loop2 = function _loop2(_j) {
             if (paths[_j].href == pathArr[_i].href) {
-              assignEvent(pathArr[_i].elem, 'click', function (e) {
-                e.stopPropagation();
+              assignEvent(pathArr[_i].elem, 'click', function () {
                 onPathClicked(pathArr[_i].href, paths[_j].viewBox);
               });
             }

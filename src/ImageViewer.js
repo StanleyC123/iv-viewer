@@ -400,7 +400,6 @@ class ImageViewer {
 
         // apply pinch and zoom feature
         const onPinchStart = (eStart) => {
-            console.log(eStart)
             const { loaded, zoomValue: startZoomValue } = this._state;
             const { _events: events } = this;
 
@@ -427,7 +426,6 @@ class ImageViewer {
             };
 
             const moveListener = (eMove) => {
-                console.log("TOUCH MOVING")
                 // eMove.preventDefault();
 
                 const newDist = getTouchPointsDistance(eMove.touches);
@@ -438,7 +436,6 @@ class ImageViewer {
             };
 
             const endListener = (eEnd) => {
-                console.log("TOUCH END")
                 // unbind events
                 events.pinchMove();
                 events.pinchEnd();
@@ -610,7 +607,7 @@ class ImageViewer {
         for (let i in pathArr) {
             for (let j in paths) {
                 if (paths[j].href == pathArr[i].href) {
-                    assignEvent(pathArr[i].elem, 'click', function (e) { e.stopPropagation(); onPathClicked(pathArr[i].href, paths[j].viewBox) });
+                    assignEvent(pathArr[i].elem, 'click', function () { onPathClicked(pathArr[i].href, paths[j].viewBox) });
                 }
             }
         }
