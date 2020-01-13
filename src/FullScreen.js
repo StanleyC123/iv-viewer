@@ -51,13 +51,13 @@ class FullScreenViewer extends ImageViewer {
     show(imageSrc, hiResImageSrc, viewBox, paths) {
         // show the element
         css(this._elements.fullScreen, { display: 'block' });
+        const { fullScreen } = this._elements;
 
         // if image source is provide load image source
         if (imageSrc) {
             if (viewBox == null)
                 viewBox = '0 0 5000 5000';
             // add home button event
-            const { fullScreen } = this._elements;
             const homeBtn = fullScreen.querySelector('.iv-fullscreen-home');
             this._events.onHomeBtnClick = assignEvent(homeBtn, 'click', () => { this.load(imageSrc, hiResImageSrc, viewBox, paths) });
 
@@ -68,15 +68,15 @@ class FullScreenViewer extends ImageViewer {
         css(this._elements.image, { transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity()) });
 
         // Add toolbar events
-        const rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
+        const rotateAcwBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
         console.log(rotateAcwBtn)
         this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', (() => { console.log("Clicked Rotate"); this.rotate(-90); }));
         console.log(this._events.onRotateAcwBtnClick)
-        const rotateCwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
+        const rotateCwBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
         this._events.onRotateCwBtnClick = assignEvent(rotateCwBtn, 'click', (() => { this.rotate(90); }));
-        const reflectHorizontalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
+        const reflectHorizontalBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-flip-horizontal');
         this._events.onReflectHorizontalBtnClick = assignEvent(reflectHorizontalBtn, 'click', (() => { this.reflect(90); }));
-        const reflectVerticalBtn = document.querySelector('.iv-fullscreen-toolbar-flip-vertical');
+        const reflectVerticalBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-flip-vertical');
         this._events.onReflectVerticalBtnClick = assignEvent(reflectVerticalBtn, 'click', (() => { this.reflect(0); }));
 
         // handle window resize
