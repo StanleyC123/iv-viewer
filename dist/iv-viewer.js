@@ -1590,6 +1590,7 @@
         html: fullScreenHtml,
         parent: document.body
       });
+      console.log("ELEMENTS CREATED");
       var container = fullScreenElem.querySelector('.iv-fullscreen-container'); // call the ImageViewer constructor
 
       _this = _possibleConstructorReturn(this, _getPrototypeOf(FullScreenViewer).call(this, container, _objectSpread2({}, options, {
@@ -1665,6 +1666,7 @@
           transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity())
         }); // Add toolbar events
 
+        console.log("EVENTHANDLERS CREATED");
         var rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
         console.log(rotateAcwBtn);
         this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', function () {

@@ -31,6 +31,7 @@ class FullScreenViewer extends ImageViewer {
             parent: document.body,
         });
 
+        console.log("ELEMENTS CREATED")
         const container = fullScreenElem.querySelector('.iv-fullscreen-container');
 
         // call the ImageViewer constructor
@@ -70,6 +71,7 @@ class FullScreenViewer extends ImageViewer {
         css(this._elements.image, { transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity()) });
 
         // Add toolbar events
+        console.log("EVENTHANDLERS CREATED")
         const rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
         console.log(rotateAcwBtn)
         this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', (() => { console.log("Clicked Rotate"); this.rotate(-90); }));
