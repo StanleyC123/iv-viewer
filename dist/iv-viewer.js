@@ -1656,6 +1656,7 @@
         }); // Add toolbar events
 
         var rotateAcwBtn = document.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
+        console.log(rotateAcwBtn);
         this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', function () {
           console.log("Clicked Rotate");
 
