@@ -1403,7 +1403,7 @@
             if (paths[_j2].href == pathArr[_i2].href) {
               assignEvent(pathArr[_i2].elem, 'touchstart', function (e) {
                 console.log(e);
-                e.stopPropagation();
+                e.preventDefault();
                 onPathClicked(pathArr[_i2].href, paths[_j2].viewBox);
               });
               assignEvent(pathArr[_i2].elem, 'click', function (e) {
