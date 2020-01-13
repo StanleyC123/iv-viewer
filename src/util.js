@@ -151,6 +151,7 @@ export function clamp(num, min, max) {
 }
 
 export function assignEvent(element, events, handler) {
+    console.log(element)
     if (typeof events === 'string') events = [events];
 
     events.forEach((event) => {
