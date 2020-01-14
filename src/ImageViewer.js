@@ -741,8 +741,10 @@ class ImageViewer {
         document.addEventListener('mousemove', () => {
             if (isMouseDown)
                 isDragging = true;
+            else
+                isDragging = false;
         });
-        document.addEventListener('mouseup', () => { isMouseDown = false; isDragging = false; });
+        document.addEventListener('mouseup', () => { isMouseDown = false; console.log("Mouse up") });
 
 
         // add all the style attributes from lowResImg to highResImg

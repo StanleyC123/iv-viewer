@@ -1440,11 +1440,11 @@
           isMouseDown = true;
         });
         document.addEventListener('mousemove', function () {
-          if (isMouseDown) isDragging = true;
+          if (isMouseDown) isDragging = true;else isDragging = false;
         });
         document.addEventListener('mouseup', function () {
           isMouseDown = false;
-          isDragging = false;
+          console.log("Mouse up");
         }); // add all the style attributes from lowResImg to highResImg
         // hiResImage.style.cssText = lowResImg.style.cssText;
 
