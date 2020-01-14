@@ -813,6 +813,7 @@ class ImageViewer {
         this.zoom(zoomValue);
     }
     zoom = (perc, point) => {
+        console.log("Zooming...")
         const { _options, _elements, _state } = this;
         const { zoomValue: curPerc, imageDim, containerDim, zoomSliderLength } = _state;
         const { image, zoomHandle } = _elements;

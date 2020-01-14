@@ -511,6 +511,7 @@ function () {
     _classCallCheck(this, ImageViewer);
 
     _defineProperty(this, "zoom", function (perc, point) {
+      console.log("Zooming...");
       var _options = _this._options,
           _elements = _this._elements,
           _state = _this._state;
