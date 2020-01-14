@@ -621,8 +621,10 @@ class ImageViewer {
         document.addEventListener('mousemove', () => {
             if (isMouseDown)
                 isDragging = true;
+            else
+                isDragging = false;
         });
-        document.addEventListener('mouseup', () => { isMouseDown = false; isDragging = false; });
+        document.addEventListener('mouseup', () => { isMouseDown = false; });
 
         this._state.loaded = false;
 
@@ -700,7 +702,6 @@ class ImageViewer {
         });
 
         var onPathClicked = (href, viewBox) => {
-            console.log(isDragging)
             if (isDragging) {
                 return;
             }
@@ -744,7 +745,7 @@ class ImageViewer {
             else
                 isDragging = false;
         });
-        document.addEventListener('mouseup', () => { isMouseDown = false; console.log("Mouse up") });
+        document.addEventListener('mouseup', () => { isMouseDown = false; });
 
 
         // add all the style attributes from lowResImg to highResImg

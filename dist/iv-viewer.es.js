@@ -1287,11 +1287,10 @@ function () {
         isMouseDown = true;
       });
       document.addEventListener('mousemove', function () {
-        if (isMouseDown) isDragging = true;
+        if (isMouseDown) isDragging = true;else isDragging = false;
       });
       document.addEventListener('mouseup', function () {
         isMouseDown = false;
-        isDragging = false;
       });
       this._state.loaded = false; // store image reference in _elements
 
@@ -1376,8 +1375,6 @@ function () {
       });
 
       var onPathClicked = function onPathClicked(href, viewBox) {
-        console.log(isDragging);
-
         if (isDragging) {
           return;
         }
@@ -1438,7 +1435,6 @@ function () {
       });
       document.addEventListener('mouseup', function () {
         isMouseDown = false;
-        console.log("Mouse up");
       }); // add all the style attributes from lowResImg to highResImg
       // hiResImage.style.cssText = lowResImg.style.cssText;
 
