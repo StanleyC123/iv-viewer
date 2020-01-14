@@ -601,7 +601,7 @@ function () {
       setTimeout(function () {
         return css(_this._elements.image, {
           transform: m2dToTransformString(matrixA) + m2dToTransformString(matrixBC),
-          transition: "transform, 0.2s"
+          transition: "transform 0.2s"
         });
       }, 10);
     });

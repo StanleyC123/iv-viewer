@@ -906,7 +906,7 @@ class ImageViewer {
         // Apply new transformation with transition
         setTimeout(() => css(this._elements.image, {
             transform: m2dToTransformString(matrixA) + m2dToTransformString(matrixBC),
-            transition: "transform, 0.2s",
+            transition: "transform 0.2s",
         }), 10);
     }
     rotate = (angle) => { this.applyMatrix(m2dRotate(angle)); }
