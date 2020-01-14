@@ -1200,6 +1200,8 @@
       value: function _loadImages() {
         var _this9 = this;
 
+        var isMouseDown = false;
+        var isDragging = false;
         var _images = this._images,
             _elements = this._elements;
         var imageSrc = _images.imageSrc,
@@ -1235,6 +1237,7 @@
         });
 
         var onPathClicked = function onPathClicked(href, viewBox) {
+          if (isDragging) return;
           _this9._images.imageSrc = href;
           _this9._images.hiResImageSrc = href;
           _this9._images.viewBox = viewBox;
@@ -1283,6 +1286,16 @@
           _loop(_i);
         }
 
+        document.addEventListener('mousedown', function () {
+          isMouseDown = true;
+        });
+        document.addEventListener('mousemove', function () {
+          if (isMouseDown) isDragging = true;
+        });
+        document.addEventListener('mouseup', function () {
+          isMouseDown = false;
+          isDragging = false;
+        });
         this._state.loaded = false; // store image reference in _elements
 
         this._elements.image = svg;

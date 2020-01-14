@@ -545,6 +545,8 @@ class ImageViewer {
     }
 
     _loadImages() {
+        var isMouseDown = false;
+        var isDragging = false;
         const { _images, _elements } = this;
         const { imageSrc, hiResImageSrc, viewBox, paths } = _images;
         const { container, snapImageWrap, imageWrap } = _elements;
@@ -579,6 +581,8 @@ class ImageViewer {
         });
 
         var onPathClicked = (href, viewBox) => {
+            if (isDragging)
+                return;
             this._images.imageSrc = href;
             this._images.hiResImageSrc = href;
             this._images.viewBox = viewBox;
@@ -611,6 +615,13 @@ class ImageViewer {
                 }
             }
         }
+
+        document.addEventListener('mousedown', () => { isMouseDown = true; });
+        document.addEventListener('mousemove', () => {
+            if (isMouseDown)
+                isDragging = true;
+        });
+        document.addEventListener('mouseup', () => { isMouseDown = false; isDragging = false; });
 
         this._state.loaded = false;
 
