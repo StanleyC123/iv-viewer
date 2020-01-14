@@ -1344,6 +1344,8 @@ function () {
     value: function _loadHighResImage(hiResImageSrc) {
       var _this10 = this;
 
+      var isMouseDown = false;
+      var isDragging = false;
       var _this$_elements5 = this._elements,
           imageWrap = _this$_elements5.imageWrap,
           container = _this$_elements5.container;
@@ -1374,6 +1376,14 @@ function () {
       });
 
       var onPathClicked = function onPathClicked(href, viewBox) {
+        console.log(isDragging);
+
+        if (isDragging) {
+          isMouseDown = false;
+          isDragging = false;
+          return;
+        }
+
         _this10._images.imageSrc = href;
         _this10._images.hiResImageSrc = href;
         _this10._images.viewBox = viewBox;
@@ -1420,9 +1430,15 @@ function () {
 
       for (var _i2 in pathArr) {
         _loop3(_i2);
-      } // add all the style attributes from lowResImg to highResImg
-      // hiResImage.style.cssText = lowResImg.style.cssText;
+      }
 
+      document.addEventListener('mousedown', function () {
+        isMouseDown = true;
+      });
+      document.addEventListener('mousemove', function () {
+        if (isMouseDown) isDragging = true;
+      }); // add all the style attributes from lowResImg to highResImg
+      // hiResImage.style.cssText = lowResImg.style.cssText;
 
       this._elements.image = container.querySelectorAll('.iv-image');
       css(this._elements.image, {

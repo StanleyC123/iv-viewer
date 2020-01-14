@@ -671,6 +671,8 @@ class ImageViewer {
         }
     }
     _loadHighResImage(hiResImageSrc) {
+        var isMouseDown = false;
+        var isDragging = false;
         const { imageWrap, container } = this._elements;
         const { imageSrc, viewBox, paths } = this._images;
 
@@ -700,6 +702,12 @@ class ImageViewer {
         });
 
         var onPathClicked = (href, viewBox) => {
+            console.log(isDragging)
+            if (isDragging) {
+                isMouseDown = false;
+                isDragging = false;
+                return;
+            }
             this._images.imageSrc = href;
             this._images.hiResImageSrc = href;
             this._images.viewBox = viewBox;
@@ -732,6 +740,13 @@ class ImageViewer {
                 }
             }
         }
+
+        document.addEventListener('mousedown', () => { isMouseDown = true; });
+        document.addEventListener('mousemove', () => {
+            if (isMouseDown)
+                isDragging = true;
+        });
+
 
         // add all the style attributes from lowResImg to highResImg
         // hiResImage.style.cssText = lowResImg.style.cssText;
