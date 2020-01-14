@@ -47,7 +47,7 @@ class FullScreenViewer extends ImageViewer {
         const closeBtn = fullScreen.querySelector('.iv-fullscreen-close');
 
         // add close button event
-        this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.hide);
+        this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.destroy);
   }
     show(imageSrc, hiResImageSrc, viewBox, paths) {
         // show the element

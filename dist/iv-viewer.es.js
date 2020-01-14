@@ -1628,7 +1628,7 @@ function (_ImageViewer) {
       var fullScreen = this._elements.fullScreen;
       var closeBtn = fullScreen.querySelector('.iv-fullscreen-close'); // add close button event
 
-      this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.hide);
+      this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.destroy);
     }
   }, {
     key: "show",
