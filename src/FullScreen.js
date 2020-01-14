@@ -24,6 +24,7 @@ const fullScreenHtml = `
 
 class FullScreenViewer extends ImageViewer {
     constructor(options = {}) {
+        remove(container.querySelector('.iv-fullscreen-container'));
         const fullScreenElem = createElement({
             tagName: 'div',
             className: 'iv-fullscreen',
@@ -47,7 +48,7 @@ class FullScreenViewer extends ImageViewer {
         const closeBtn = fullScreen.querySelector('.iv-fullscreen-close');
 
         // add close button event
-        this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.destroy);
+        this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.hide);
   }
     show(imageSrc, hiResImageSrc, viewBox, paths) {
         // show the element
@@ -111,7 +112,7 @@ class FullScreenViewer extends ImageViewer {
         // Remove home button event
         this._events.onHomeBtnClick();
     }
-    destroy = () => {
+    destroy() {
         const { fullScreen } = this._elements;
 
         // destroy image viewer

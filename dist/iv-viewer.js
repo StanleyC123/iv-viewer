@@ -1585,6 +1585,7 @@
 
       _classCallCheck(this, FullScreenViewer);
 
+      remove(container.querySelector('.iv-fullscreen-container'));
       var fullScreenElem = createElement({
         tagName: 'div',
         className: 'iv-fullscreen',
@@ -1621,15 +1622,6 @@
         _this._events.onHomeBtnClick();
       });
 
-      _defineProperty(_assertThisInitialized(_this), "destroy", function () {
-        var fullScreen = _this._elements.fullScreen; // destroy image viewer
-
-        _get(_getPrototypeOf(FullScreenViewer.prototype), "destroy", _assertThisInitialized(_this)).call(_assertThisInitialized(_this)); // remove the element
-
-
-        remove(fullScreen);
-      });
-
       _this._elements.fullScreen = fullScreenElem;
 
       _this._initFullScreenEvents();
@@ -1643,7 +1635,7 @@
         var fullScreen = this._elements.fullScreen;
         var closeBtn = fullScreen.querySelector('.iv-fullscreen-close'); // add close button event
 
-        this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.destroy);
+        this._events.onCloseBtnClick = assignEvent(closeBtn, 'click', this.hide);
       }
     }, {
       key: "show",
@@ -1707,6 +1699,16 @@
         css(document.querySelector('html'), {
           overflow: 'hidden'
         });
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        var fullScreen = this._elements.fullScreen; // destroy image viewer
+
+        _get(_getPrototypeOf(FullScreenViewer.prototype), "destroy", this).call(this); // remove the element
+
+
+        remove(fullScreen);
       }
     }]);
 
