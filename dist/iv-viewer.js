@@ -1237,8 +1237,6 @@
         });
 
         var onPathClicked = function onPathClicked(href, viewBox) {
-          console.log(isDragging);
-
           if (isDragging) {
             isMouseDown = false;
             isDragging = false;
@@ -1382,8 +1380,6 @@
         });
 
         var onPathClicked = function onPathClicked(href, viewBox) {
-          console.log(isDragging);
-
           if (isDragging) {
             isMouseDown = false;
             isDragging = false;

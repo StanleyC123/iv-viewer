@@ -581,7 +581,6 @@ class ImageViewer {
         });
 
         var onPathClicked = (href, viewBox) => {
-            console.log(isDragging)
             if (isDragging) {
                 isMouseDown = false;
                 isDragging = false;
@@ -702,7 +701,6 @@ class ImageViewer {
         });
 
         var onPathClicked = (href, viewBox) => {
-            console.log(isDragging)
             if (isDragging) {
                 isMouseDown = false;
                 isDragging = false;
