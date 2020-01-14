@@ -467,6 +467,7 @@ class ImageViewer {
         let changedDelta = 0;
 
         const onMouseWheel = (e) => {
+            console.log("Scroll zooming...")
             const { loaded, zoomValue } = this._state;
 
             if (!_options.zoomOnMouseWheel || !loaded) return;

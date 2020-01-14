@@ -1118,6 +1118,7 @@
         var changedDelta = 0;
 
         var onMouseWheel = function onMouseWheel(e) {
+          console.log("Scroll zooming...");
           var _this7$_state = _this7._state,
               loaded = _this7$_state.loaded,
               zoomValue = _this7$_state.zoomValue;
