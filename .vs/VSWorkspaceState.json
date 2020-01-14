@@ -6,6 +6,7 @@
     "\\example\\fullscreen-mode",
     "\\example\\image-mode",
     "\\example\\images",
+    "\\lib",
     "\\src"
   ],
   "SelectedNode": "\\src\\ImageViewer.js",

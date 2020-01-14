@@ -596,7 +596,8 @@ function () {
       var matrixC = m2dParseTransformString(curTransform.match(/matrix[(].*?[)]/g)[1]);
       var matrixBC = m2dMultiply(matrixB, matrixC);
       var curMatrix = m2dParseTransformString(css(_this._elements.image, 'transform'));
-      console.log(curTransform); // Re-apply transformation instantaneously
+      console.log(curTransform);
+      console.log(m2dToTransformString(matrixBC)); // Re-apply transformation instantaneously
 
       css(_this._elements.image, {
         transform: m2dToTransformString(matrixBC),

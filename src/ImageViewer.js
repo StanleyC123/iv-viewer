@@ -897,6 +897,7 @@ class ImageViewer {
         const matrixBC = m2dMultiply(matrixB, matrixC);
         const curMatrix = m2dParseTransformString(css(this._elements.image, 'transform'))
         console.log(curTransform);
+        console.log(m2dToTransformString(matrixBC));
         // Re-apply transformation instantaneously
         css(this._elements.image, {
             transform: m2dToTransformString(matrixBC),
