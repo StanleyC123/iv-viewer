@@ -1570,7 +1570,7 @@ function (_ImageViewer) {
 
     _classCallCheck(this, FullScreenViewer);
 
-    if (document.querySelector('.iv-fullscreen-container')) remove(document.querySelector('.iv-fullscreen-container'));
+    if (document.querySelector('.iv-fullscreen')) remove(document.querySelector('.iv-fullscreen'));
     var fullScreenElem = createElement({
       tagName: 'div',
       className: 'iv-fullscreen',

@@ -24,8 +24,8 @@ const fullScreenHtml = `
 
 class FullScreenViewer extends ImageViewer {
     constructor(options = {}) {
-        if (document.querySelector('.iv-fullscreen-container'))
-            remove(document.querySelector('.iv-fullscreen-container'));
+        if (document.querySelector('.iv-fullscreen'))
+            remove(document.querySelector('.iv-fullscreen'));
 
         const fullScreenElem = createElement({
             tagName: 'div',
