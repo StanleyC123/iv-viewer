@@ -332,18 +332,13 @@ function clamp(num, min, max) {
   return Math.min(Math.max(num, min), max);
 }
 function assignEvent(element, events, handler) {
-  console.log(element);
-  console.log(handler);
   if (typeof events === 'string') events = [events];
   events.forEach(function (event) {
-    console.log(event);
     element.addEventListener(event, handler);
   });
   return function () {
     events.forEach(function (event) {
       element.removeEventListener(event, handler);
-      console.log("Removed:");
-      console.log(handler);
     });
   };
 }
@@ -595,9 +590,7 @@ function () {
       var matrixB = m2dParseTransformString(curTransform.match(/matrix[(].*?[)]/g)[0]);
       var matrixC = m2dParseTransformString(curTransform.match(/matrix[(].*?[)]/g)[1]);
       var matrixBC = m2dMultiply(matrixB, matrixC);
-      var curMatrix = m2dParseTransformString(css(_this._elements.image, 'transform'));
-      console.log(curTransform);
-      console.log(m2dToTransformString(matrixBC)); // Re-apply transformation instantaneously
+      var curMatrix = m2dParseTransformString(css(_this._elements.image, 'transform')); // Re-apply transformation instantaneously
 
       css(_this._elements.image, {
         transform: m2dToTransformString(matrixBC),
@@ -613,8 +606,6 @@ function () {
     });
 
     _defineProperty(this, "rotate", function (angle) {
-      console.log(angle);
-
       _this.applyMatrix(m2dRotate(angle));
     });
 
@@ -1586,7 +1577,6 @@ function (_ImageViewer) {
       html: fullScreenHtml,
       parent: document.body
     });
-    console.log("ELEMENTS CREATED");
     var container = fullScreenElem.querySelector('.iv-fullscreen-container'); // call the ImageViewer constructor
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(FullScreenViewer).call(this, container, _objectSpread2({}, options, {
@@ -1664,16 +1654,13 @@ function (_ImageViewer) {
         transform: m2dToTransformString(m3dIdentity()) + m2dToTransformString(m3dIdentity())
       }); // Add toolbar events
 
-      console.log("EVENTHANDLERS CREATED");
       var fullScreen = this._elements.fullScreen;
       var rotateAcwBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-rotate-anticlockwise');
-      console.log(rotateAcwBtn);
       this._events.onRotateAcwBtnClick = assignEvent(rotateAcwBtn, 'click', function () {
         console.log("Clicked Rotate");
 
         _this2.rotate(-90);
       });
-      console.log(this._events.onRotateAcwBtnClick);
       var rotateCwBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-rotate-clockwise');
       this._events.onRotateCwBtnClick = assignEvent(rotateCwBtn, 'click', function () {
         _this2.rotate(90);
@@ -1685,8 +1672,7 @@ function (_ImageViewer) {
       var reflectVerticalBtn = fullScreen.querySelector('.iv-fullscreen-toolbar-flip-vertical');
       this._events.onReflectVerticalBtnClick = assignEvent(reflectVerticalBtn, 'click', function () {
         _this2.reflect(0);
-      });
-      console.log(this._events); // handle window resize
+      }); // handle window resize
 
       this._events.onWindowResize = assignEvent(window, 'resize', this.refresh); // disable scroll on html
 

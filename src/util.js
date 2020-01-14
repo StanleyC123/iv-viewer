@@ -151,20 +151,15 @@ export function clamp(num, min, max) {
 }
 
 export function assignEvent(element, events, handler) {
-    console.log(element)
-    console.log(handler)
     if (typeof events === 'string') events = [events];
 
     events.forEach((event) => {
-        console.log(event)
         element.addEventListener(event, handler);
     });
 
     return () => {
         events.forEach((event) => {
             element.removeEventListener(event, handler);
-            console.log("Removed:")
-            console.log(handler)
         });
     };
 }
