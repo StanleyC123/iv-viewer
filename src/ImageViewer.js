@@ -581,8 +581,11 @@ class ImageViewer {
         });
 
         var onPathClicked = (href, viewBox) => {
-            if (isDragging)
+            if (isDragging) {
+                isMouseDown = false;
+                isDragging = false;
                 return;
+            }
             this._images.imageSrc = href;
             this._images.hiResImageSrc = href;
             this._images.viewBox = viewBox;
@@ -616,12 +619,11 @@ class ImageViewer {
             }
         }
 
-        document.addEventListener('mousedown', () => { isMouseDown = true; });
+        document.addEventListener('mousedown', () => { isMouseDown = true; console.log(isMouseDown) });
         document.addEventListener('mousemove', () => {
             if (isMouseDown)
                 isDragging = true;
         });
-        document.addEventListener('mouseup', () => { isMouseDown = false; isDragging = false; });
 
         this._state.loaded = false;
 

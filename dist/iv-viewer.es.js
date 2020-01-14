@@ -1231,7 +1231,12 @@ function () {
       });
 
       var onPathClicked = function onPathClicked(href, viewBox) {
-        if (isDragging) return;
+        if (isDragging) {
+          isMouseDown = false;
+          isDragging = false;
+          return;
+        }
+
         _this9._images.imageSrc = href;
         _this9._images.hiResImageSrc = href;
         _this9._images.viewBox = viewBox;
@@ -1282,13 +1287,10 @@ function () {
 
       document.addEventListener('mousedown', function () {
         isMouseDown = true;
+        console.log(isMouseDown);
       });
       document.addEventListener('mousemove', function () {
         if (isMouseDown) isDragging = true;
-      });
-      document.addEventListener('mouseup', function () {
-        isMouseDown = false;
-        isDragging = false;
       });
       this._state.loaded = false; // store image reference in _elements
 
