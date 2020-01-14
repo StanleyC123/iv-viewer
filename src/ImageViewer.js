@@ -467,7 +467,6 @@ class ImageViewer {
         let changedDelta = 0;
 
         const onMouseWheel = (e) => {
-            console.log("Scroll zooming...")
             const { loaded, zoomValue } = this._state;
 
             if (!_options.zoomOnMouseWheel || !loaded) return;
@@ -813,7 +812,6 @@ class ImageViewer {
         this.zoom(zoomValue);
     }
     zoom = (perc, point) => {
-        console.log("Zooming...")
         const { _options, _elements, _state } = this;
         const { zoomValue: curPerc, imageDim, containerDim, zoomSliderLength } = _state;
         const { image, zoomHandle } = _elements;
