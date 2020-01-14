@@ -1585,7 +1585,7 @@
 
       _classCallCheck(this, FullScreenViewer);
 
-      remove(container.querySelector('.iv-fullscreen-container'));
+      if (container.querySelector('.iv-fullscreen-container')) remove(container.querySelector('.iv-fullscreen-container'));
       var fullScreenElem = createElement({
         tagName: 'div',
         className: 'iv-fullscreen',
