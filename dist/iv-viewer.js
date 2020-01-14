@@ -1621,6 +1621,15 @@
         _this._events.onHomeBtnClick();
       });
 
+      _defineProperty(_assertThisInitialized(_this), "destroy", function () {
+        var fullScreen = _this._elements.fullScreen; // destroy image viewer
+
+        _get(_getPrototypeOf(FullScreenViewer.prototype), "destroy", _assertThisInitialized(_this)).call(_assertThisInitialized(_this)); // remove the element
+
+
+        remove(fullScreen);
+      });
+
       _this._elements.fullScreen = fullScreenElem;
 
       _this._initFullScreenEvents();
@@ -1698,16 +1707,6 @@
         css(document.querySelector('html'), {
           overflow: 'hidden'
         });
-      }
-    }, {
-      key: "destroy",
-      value: function destroy() {
-        var fullScreen = this._elements.fullScreen; // destroy image viewer
-
-        _get(_getPrototypeOf(FullScreenViewer.prototype), "destroy", this).call(this); // remove the element
-
-
-        remove(fullScreen);
       }
     }]);
 

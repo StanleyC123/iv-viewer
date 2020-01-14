@@ -111,7 +111,7 @@ class FullScreenViewer extends ImageViewer {
         // Remove home button event
         this._events.onHomeBtnClick();
     }
-    destroy() {
+    destroy = () => {
         const { fullScreen } = this._elements;
 
         // destroy image viewer
